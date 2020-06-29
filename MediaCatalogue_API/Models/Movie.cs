@@ -3,12 +3,23 @@
 namespace MediaCatalogue_API.Models
 {
     public class Movie: EntityBase
-    {
+    {        
         private string _title;
         private string _year;
         private List<Actor> _actors;
         private List<Crew> _crew;
         private Genre _genre;
+
+        public Movie() { }
+
+        public Movie(string title, string year, List<Actor> actors, List<Crew> crew, Genre genre)
+        {
+            _title = title;
+            _year = year;
+            _actors = actors;
+            _crew = crew;
+            _genre = genre;
+        }
 
         public string Title
         {
@@ -22,13 +33,13 @@ namespace MediaCatalogue_API.Models
             set { _year = value; }
         }
 
-        private List<Actor> Actors
+        public List<Actor> Actors
         {
             get { return _actors; }
             set { _actors = value; }
         }      
 
-        private List<Crew> Crew
+        public List<Crew> Crew
         {
             get { return _crew; }
             set { _crew = value; }

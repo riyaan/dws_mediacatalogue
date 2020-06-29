@@ -3,6 +3,8 @@ namespace MediaCatalogue_API.Models
 {
     public class Actor: EntityBase
     {
+        public Actor() { }        
+
         private string _name;
 
         public string Name
