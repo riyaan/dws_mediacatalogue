@@ -4,51 +4,29 @@ namespace MediaCatalogue_API.Models
 {
     public class Movie: EntityBase
     {        
-        private string _title;
-        private string _year;
-        private List<Actor> _actors;
-        private List<Crew> _crew;
-        private Genre _genre;
-
         public Movie() { }
 
-        public Movie(string title, string year, List<Actor> actors, List<Crew> crew, Genre genre)
+        public Movie(string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
         {
-            _title = title;
-            _year = year;
-            _actors = actors;
-            _crew = crew;
-            _genre = genre;
+            Title = title;
+            Year = year;
+            Location = location;
+            Actors = actors;
+            Crew = crew;
+            Genre = genre;
         }
 
-        public string Title
-        {
-          get { return _title; }
-          set { _title = value; }
-        }
+        public string Title { get; set; }
 
-        public string Year
-        {
-            get { return _year; }
-            set { _year = value; }
-        }
+        public int Year { get; set; }
 
-        public List<Actor> Actors
-        {
-            get { return _actors; }
-            set { _actors = value; }
-        }      
+        public string Location { get; set; }
 
-        public List<Crew> Crew
-        {
-            get { return _crew; }
-            set { _crew = value; }
-        } 
+        public List<Actor> Actors { get; set; }     
 
-        public Genre Genre
-        {
-            get { return _genre; }
-            set { _genre = value; }
-        }
+        public List<Crew> Crew { get; set; }
+
+        public Genre Genre { get; set; }
+
     }
 }

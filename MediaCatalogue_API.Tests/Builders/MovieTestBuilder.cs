@@ -10,7 +10,8 @@ namespace MediaCatalogue_API.Tests.Builders
         public List<Crew> _crew { get; set; }
         public Genre _genre { get; set; }
         public string _title { get; set; }
-        public string _year { get; set; }
+        public int _year { get; set; }
+        public string _location { get; set; }
 
         public MovieTestBuilder()
         {
@@ -31,7 +32,9 @@ namespace MediaCatalogue_API.Tests.Builders
 
             _title = "Goodfellas";
 
-            _year = "1980";
+            _year = 1980;
+
+            _location = "DVD";
         }
 
         public Movie Build()
@@ -43,7 +46,8 @@ namespace MediaCatalogue_API.Tests.Builders
                 Crew = _crew,
                 Genre = _genre,
                 Title = _title,
-                Year = _year
+                Year = _year,
+                Location = _location
             };
 
             return model;

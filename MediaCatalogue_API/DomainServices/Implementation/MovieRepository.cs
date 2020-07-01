@@ -1,7 +1,6 @@
 ﻿using MediaCatalogue_API.Factory;
 using MediaCatalogue_API.Models;
 using MediaCatalogue_API.RepositoryWrapper;
-using System;
 using System.Collections.Generic;
 
 namespace MediaCatalogue_API.DomainServices.Interface
@@ -17,20 +16,26 @@ namespace MediaCatalogue_API.DomainServices.Interface
             _factory = factory;
         }
 
-        public int Add(string title, string year, List<Actor> actors, List<Crew> crew, Genre genre)
+        public int Add(string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
         {
-            Movie movie = _factory.Create(new object[] { title, year, actors, crew, genre });
+            Movie movie = _factory.Create(new object[] { title, year, location, actors, crew, genre });
             return _repositoryWrapper.Create(movie);
         }
 
-        public bool Edit(string title, string year, List<Actor> actors, List<Crew> _crew, Genre _genre)
+        public List<Movie> Find(string query)
         {
-            throw new NotImplementedException();
+            return _repositoryWrapper.ReadAll(query);
+        }
+
+        public bool Edit(string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
+        {
+            Movie movie = _factory.Create(new object[] { title, year, location, actors, crew, genre });
+            return _repositoryWrapper.Update(movie);
         }
 
         public bool Delete(int movieId)
         {
-            throw new NotImplementedException();
-        }
+            return _repositoryWrapper.Delete(_repositoryWrapper.ReadByID(movieId));
+        }       
     }
 }

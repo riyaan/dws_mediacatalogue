@@ -7,7 +7,7 @@ namespace MediaCatalogue_API.RepositoryWrapper
         int Create(TEntity movie);
         List<TEntity> ReadAll(string queryString);
         TEntity ReadByID(object id);
-        int Update(TEntity movie);
-        void Delete(TEntity entityToDelete);        
+        bool Update(TEntity movie);
+        bool Delete(TEntity entityToDelete);        
     }
 }

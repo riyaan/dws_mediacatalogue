@@ -10,7 +10,7 @@ namespace MediaCatalogue_API.RepositoryWrapper
             throw new NotImplementedException();
         }
 
-        public void Delete(TEntity entityToDelete)
+        public bool Delete(TEntity entityToDelete)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace MediaCatalogue_API.RepositoryWrapper
             throw new NotImplementedException();
         }
 
-        public int Update(TEntity movie)
+        public bool Update(TEntity movie)
         {
             throw new NotImplementedException();
         }

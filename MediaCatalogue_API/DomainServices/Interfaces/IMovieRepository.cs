@@ -5,8 +5,9 @@ namespace MediaCatalogue_API.DomainServices.Interface
 {
     public interface IMovieRepository
     {
-        int Add(string title, string year, List<Actor> actors, List<Crew> _crew, Genre _genre);
-        bool Edit(string title, string year, List<Actor> actors, List<Crew> _crew, Genre _genre);
+        int Add(string title, int year, string location, List<Actor> actors, List<Crew> _crew, Genre _genre);
+        List<Movie> Find(string query);
+        bool Edit(string title, int year, string location, List<Actor> actors, List<Crew> _crew, Genre _genre);
         bool Delete(int movieId);
     }
 }
