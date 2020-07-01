@@ -5,7 +5,7 @@ namespace MediaCatalogue_API.RepositoryWrapper
 {
     public class RepositoryWrapper<TEntity> : IRepositoryWrapper<TEntity> where TEntity : class
     {
-        public int Create(TEntity movie)
+        public int Create(TEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace MediaCatalogue_API.RepositoryWrapper
             throw new NotImplementedException();
         }
 
-        public bool Update(TEntity movie)
+        public bool Update(TEntity entity)
         {
             throw new NotImplementedException();
         }
