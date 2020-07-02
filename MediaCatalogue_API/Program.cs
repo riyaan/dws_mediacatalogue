@@ -1,9 +1,18 @@
-﻿using System;
+﻿using MediaCatalogue_API.Controllers;
+using MediaCatalogue_API.DomainServices.Interface;
+using MediaCatalogue_API.Factory;
+using MediaCatalogue_API.Models;
+using MediaCatalogue_API.RepositoryWrapper;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
 using System.Web.Http.SelfHost;
 
 namespace MediaCatalogue_API
@@ -12,7 +21,7 @@ namespace MediaCatalogue_API
     {
         static void Main(string[] args)
         {
-            var config = new HttpSelfHostConfiguration("http://localhost:8000");
+            var config = new HttpSelfHostConfiguration("http://localhost:8000");            
 
             config.MapHttpAttributeRoutes();
 
@@ -20,9 +29,14 @@ namespace MediaCatalogue_API
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}/{query}",
-                defaults: new { controller = "Movie", action = "Welcome", id = RouteParameter.Optional, query = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
+
+            config.DependencyResolver = new NinjectResolver();
+
+            // Tried using AutoFac
+            //Bootstrapper.Run();
 
             using (HttpSelfHostServer server = new HttpSelfHostServer(config))
             {

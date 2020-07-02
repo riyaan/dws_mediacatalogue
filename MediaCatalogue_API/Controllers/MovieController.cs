@@ -10,7 +10,7 @@ namespace MediaCatalogue_API.Controllers
     {
         private IMovieRepository _movieRepository;
 
-        public MovieController() { }
+        //public MovieController() { }
 
         public MovieController(IMovieRepository movieRepository)
         {
@@ -24,7 +24,8 @@ namespace MediaCatalogue_API.Controllers
             return new string[] { "Welcome to the Movie Catalogue" };
         }
 
-        // GET: api/Movie/Goodfellas
+        // GET: api/movie/search/Goodfellas
+        [Route("search/{query}")]
         [HttpGet]
         public IEnumerable<Movie> Get(string query)
         {

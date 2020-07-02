@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_API", "MediaCatalogue_API\MediaCatalogue_API.csproj", "{45E0B950-C6C0-497E-944E-D93E2792C6AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_UI", "MediaCatalogue_UI\MediaCatalogue_UI.csproj", "{98214C9F-A2F7-4778-B0B4-88372697D318}"
@@ -8,6 +10,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BB1EA7EC-1063-4B5F-B690-F8E23B7D6398}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_API.Tests", "MediaCatalogue_API.Tests\MediaCatalogue_API.Tests.csproj", "{028F241E-79A4-439D-8644-543A4A7C826A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database Scripts", "Database Scripts", "{68F375F3-54B7-4EDA-AF37-D1E2D444AF7F}"
+	ProjectSection(SolutionItems) = preProject
+		Database Scripts\setup.sql = Database Scripts\setup.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
