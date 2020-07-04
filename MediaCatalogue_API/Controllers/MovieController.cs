@@ -32,17 +32,17 @@ namespace MediaCatalogue_API.Controllers
             return _movieRepository.Find(query);
         }
 
-        // POST: api/Movie
-        public void Post([FromBody]string value)
+        // POST: api/movie/add/movie
+        [Route("add/{movie}")]
+        [HttpPost]
+        public int Add([FromBody] Movie movie)
         {
+            return _movieRepository.Add(movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
         }
 
-        // PUT: api/Movie/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Movie/5
+        // DELETE: api/movie/delete/5
+        [Route("delete/{id}")]
+        [HttpDelete]
         public void Delete(int id)
         {
         }

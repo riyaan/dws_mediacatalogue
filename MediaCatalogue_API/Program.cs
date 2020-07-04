@@ -4,6 +4,7 @@ using MediaCatalogue_API.Factory;
 using MediaCatalogue_API.Models;
 using MediaCatalogue_API.RepositoryWrapper;
 using Ninject;
+using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,16 @@ namespace MediaCatalogue_API
     {
         static void Main(string[] args)
         {
-            var config = new HttpSelfHostConfiguration("http://localhost:8000");            
+            var config = new HttpSelfHostConfiguration("http://localhost:8000");
+
+            //GlobalConfiguration.Configuration
+            //    .EnableSwagger(c => c.SingleApiVersion("v1", "DWS Media Catalogue"))
+            //    .EnableSwaggerUi();
+
+            config.EnableSwagger(c => c.SingleApiVersion("v1", "DWS Media Catalogue"))
+                .EnableSwaggerUi();
+
+            //SwaggerConfig.Register();
 
             config.MapHttpAttributeRoutes();
 
@@ -29,8 +39,8 @@ namespace MediaCatalogue_API
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { action = RouteParameter.Optional, id = RouteParameter.Optional }
             );
 
             config.DependencyResolver = new NinjectResolver();

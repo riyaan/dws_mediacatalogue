@@ -27,7 +27,7 @@ namespace MediaCatalogue_API.Tests.DomainServices.Implementation
         [Test]
         public void AddMovie_Success()
         {
-            _repositoryWrapper.Setup(foo => foo.Create(It.IsAny<Movie>())).Returns(1);
+            _repositoryWrapper.Setup(foo => foo.InsertMovie(It.IsAny<Movie>())).Returns(1);
 
             MovieRepository mr = new MovieRepository(_repositoryWrapper.Object, _factory);
 
