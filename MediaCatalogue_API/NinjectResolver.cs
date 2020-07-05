@@ -60,10 +60,18 @@ namespace MediaCatalogue_API
         {
             kernel.Bind<IRepositoryWrapper<Movie>>().To<RepositoryWrapper<Movie>>().InSingletonScope();
             kernel.Bind<IRepositoryWrapper<Genre>>().To<RepositoryWrapper<Genre>>().InSingletonScope();
+            kernel.Bind<IRepositoryWrapper<Actor>>().To<RepositoryWrapper<Actor>>().InSingletonScope();
+            kernel.Bind<IRepositoryWrapper<Crew>>().To<RepositoryWrapper<Crew>>().InSingletonScope();
+
             kernel.Bind<IFactory<Movie>>().To<Factory<Movie>>().InSingletonScope();
             kernel.Bind<IFactory<Genre>>().To<Factory<Genre>>().InSingletonScope();
+            kernel.Bind<IFactory<Actor>>().To<Factory<Actor>>().InSingletonScope();
+            kernel.Bind<IFactory<Crew>>().To<Factory<Crew>>().InSingletonScope();
+
             kernel.Bind<IMovieRepository>().To<MovieRepository>().InSingletonScope();
             kernel.Bind<IGenreRepository>().To<GenreRepository>().InSingletonScope();
+            kernel.Bind<IActorRepository>().To<ActorRepository>().InSingletonScope();
+            kernel.Bind<ICrewRepository>().To<CrewRepository>().InSingletonScope();
 
             return kernel;
         }

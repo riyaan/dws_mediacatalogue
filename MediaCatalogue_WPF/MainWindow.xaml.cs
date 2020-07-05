@@ -23,14 +23,18 @@ namespace MediaCatalogue_WPF
     {
         private ISearchInteractor _searchInteractor;
         private IGenreInteractor _genreInteractor;
+        private IActorInteractor _actorInteractor;
+        private ICrewInteractor _crewInteractor;
 
-        public MainWindow(ISearchInteractor searchInteractor, IGenreInteractor genreInteractor)
+        public MainWindow(ISearchInteractor searchInteractor, IGenreInteractor genreInteractor, IActorInteractor actorInteractor,
+            ICrewInteractor crewInteractor)
         {
             InitializeComponent();
 
             _searchInteractor = searchInteractor;
             _genreInteractor = genreInteractor;
-
+            _actorInteractor = actorInteractor;
+            _crewInteractor = crewInteractor;
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -40,7 +44,7 @@ namespace MediaCatalogue_WPF
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            Create create = new Create(_searchInteractor, _genreInteractor);
+            Create create = new Create(_searchInteractor, _genreInteractor, _actorInteractor, _crewInteractor);
             create.ShowDialog();
         }
     }

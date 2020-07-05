@@ -1,4 +1,5 @@
-﻿using MediaCatalogue_WPF.Models;
+﻿using MediaCatalogue_API.Models;
+using MediaCatalogue_WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace MediaCatalogue_WPF.Interactors
 {
     public interface IMovieInteractor
     {
-        ResponseModel AddMovie(MovieRequestModel request);
+        ResponseModel<Movie> AddMovie(MovieRequestModel request);
     }
 }

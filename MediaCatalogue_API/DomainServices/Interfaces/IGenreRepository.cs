@@ -5,7 +5,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
 {
     public interface IGenreRepository
     {
-        int Add(string name);
+        Genre Add(string name);
         List<Genre> GetAllGenres();
         List<Genre> GetGenreByName(string name);
     }

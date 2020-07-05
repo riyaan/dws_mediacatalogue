@@ -1,4 +1,6 @@
-﻿using MediaCatalogue_API.Models;
+﻿using MediaCatalogue_API.Factory;
+using MediaCatalogue_API.Models;
+using MediaCatalogue_API.RepositoryWrapper;
 using System;
 using System.Collections.Generic;
 
@@ -6,18 +8,32 @@ namespace MediaCatalogue_API.DomainServices.Interface
 {
     public class CrewRepository: ICrewRepository
     {
-        public CrewRepository()
+        private IRepositoryWrapper<Crew> _repositoryWrapper;
+        private IFactory<Crew> _factory;
+
+
+        public CrewRepository(IRepositoryWrapper<Crew> repositoryWrapper, IFactory<Crew> factory)
         {
+            _repositoryWrapper = repositoryWrapper;
+            _factory = factory;
         }
 
-        public List<Movie> GetAllMovies()
+        public Crew Add(string name)
+        {
+            Crew crew = _factory.Create(new object[] { name });
+            int crewId = _repositoryWrapper.InsertCrew(crew);
+
+            return _repositoryWrapper.ReadGenreByID(crewId);
+        }
+
+        public List<Crew> GetAllCrew()
         {
             throw new NotImplementedException();
         }
 
-        public List<Role> GetAllRoles()
+        public List<Crew> GetCrewByName(string name)
         {
-            throw new NotImplementedException();
+            return _repositoryWrapper.ReadCrewByName(name);
         }
     }
 }

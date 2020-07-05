@@ -1,4 +1,5 @@
-﻿using MediaCatalogue_WPF.Interactors;
+﻿using MediaCatalogue_API.Models;
+using MediaCatalogue_WPF.Interactors;
 using MediaCatalogue_WPF.Models;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,18 @@ namespace MediaCatalogue_WPF
     {
         private ISearchInteractor _searchInteractor;
         private IGenreInteractor _genreInteractor;
+        private IActorInteractor _actorInteractor;
+        private ICrewInteractor _crewInteractor;
 
-
-        public Create(ISearchInteractor searchInteractor, IGenreInteractor genreInteractor)
+        public Create(ISearchInteractor searchInteractor, IGenreInteractor genreInteractor, IActorInteractor actorInteractor,
+            ICrewInteractor crewInteractor)
         {
             InitializeComponent();
 
             _searchInteractor = searchInteractor;
             _genreInteractor = genreInteractor;
+            _actorInteractor = actorInteractor;
+            _crewInteractor = crewInteractor;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -38,15 +43,15 @@ namespace MediaCatalogue_WPF
             MovieRequestModel request = new MovieRequestModel()
             {
                 Actors = new List<string>() { txtActor.Text },
-                Director = new List<string>() { txtDirector.Text },
+                Director = txtDirector.Text,
                 Genre = txtGenre.Text,
                 Location = txtLocation.Text,
                 Title = txtTitle.Text,
                 Year = Convert.ToInt32(txtYear.Text)
             };
 
-            MovieInteractor mi = new MovieInteractor(_searchInteractor, _genreInteractor);
-            ResponseModel response = mi.AddMovie(request);
+            MovieInteractor mi = new MovieInteractor(_searchInteractor, _genreInteractor, _actorInteractor, _crewInteractor);
+            ResponseModel<Movie> response = mi.AddMovie(request);
         }
     }
 }

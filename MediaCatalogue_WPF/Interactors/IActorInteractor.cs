@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace MediaCatalogue_WPF.Interactors
 {
-    public interface IGenreInteractor
+    public interface IActorInteractor
     {
-        ResponseModel<Genre> AddGenre(GenreRequestModel request);
+        ResponseModel<Actor> AddActor(ActorRequestModel request);
     }
 }

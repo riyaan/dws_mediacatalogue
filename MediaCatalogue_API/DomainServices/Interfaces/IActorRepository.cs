@@ -5,6 +5,10 @@ namespace MediaCatalogue_API.DomainServices.Interface
 {
     public interface IActorRepository
     {
-        List<Movie> GetAllMovies();
+        List<Movie> GetAllMovies(string actorName);
+
+        Actor Add(string actorName);
+        List<Actor> GetAllActors();
+        List<Actor> GetActorByName(string actorName);
     }
 }

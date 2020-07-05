@@ -17,10 +17,12 @@ namespace MediaCatalogue_API.DomainServices.Interface
             _factory = factory;
         }
 
-        public int Add(string name)
+        public Genre Add(string name)
         {
             Genre genre = _factory.Create(new object[] { name });
-            return _repositoryWrapper.InsertGenre(genre);
+            int genreId = _repositoryWrapper.InsertGenre(genre);
+
+            return _repositoryWrapper.ReadGenreByID(genreId);
         }
 
         public List<Genre> GetAllGenres()

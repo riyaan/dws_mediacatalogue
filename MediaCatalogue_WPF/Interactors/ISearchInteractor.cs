@@ -10,11 +10,13 @@ namespace MediaCatalogue_WPF.Interactors
 {
     public interface ISearchInteractor
     {
-        ResponseModel SearchMovieByTitle(string query);
-        ResponseModel SearchMovieByActor(string query);
-        ResponseModel SearchMovieByDirector(string query);
+        ResponseModel<Movie> SearchMovieByTitle(string query);
+        ResponseModel<Movie> SearchMovieByActor(string query);
+        ResponseModel<Movie> SearchMovieByDirector(string query);
 
-        List<Genre> SearchGenre(string query);
+        ResponseModel<Genre> SearchGenre(string query);
+        ResponseModel<Actor> SearchActor(string query);
+        ResponseModel<Crew> SearchCrew(string query);
 
     }
 }

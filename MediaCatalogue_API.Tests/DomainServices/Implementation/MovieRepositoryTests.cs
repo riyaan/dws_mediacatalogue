@@ -31,12 +31,12 @@ namespace MediaCatalogue_API.Tests.DomainServices.Implementation
 
             MovieRepository mr = new MovieRepository(_repositoryWrapper.Object, _factory);
 
-            int result = mr.Add("Goodfellas", 1990, "DVD",
+            Movie result = mr.Add("Goodfellas", 1990, "DVD",
                 new List<Actor>() { new ActorTestBuilder() { }.Build() }, 
                 new List<Crew>() { new CrewTestBuilder() { }.Build() },
                 new GenreTestBuilder() { }.Build());
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, result.Id);
         }
 
         [Test]

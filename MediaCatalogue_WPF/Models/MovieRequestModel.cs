@@ -13,7 +13,7 @@ namespace MediaCatalogue_WPF.Models
         public string Location { get; set; }   
         
         public List<string> Actors { get; set; }
-        public List<string> Director { get; set; }
+        public string Director { get; set; }
         public string Genre;
     }
 }

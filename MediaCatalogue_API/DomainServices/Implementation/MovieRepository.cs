@@ -16,10 +16,21 @@ namespace MediaCatalogue_API.DomainServices.Interface
             _factory = factory;
         }
 
-        public int Add(string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
+        public Movie Add(string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
         {
             Movie movie = _factory.Create(new object[] { title, year, location, actors, crew, genre });
-            return _repositoryWrapper.InsertMovie(movie);
+
+            int movieId = _repositoryWrapper.InsertMovie(movie);
+
+            // TODO: insert actormovie
+            foreach (Actor actor in actors)
+                _repositoryWrapper.InsertActorMovie(actor.Id, movieId);
+
+            // TODO: insert crewmovie
+            foreach (Crew crewMember in crew)
+                _repositoryWrapper.InsertActorMovie(crewMember.Id, movieId);
+
+            return _repositoryWrapper.ReadMovieByID(movieId);
         }
 
         public List<Movie> Find(string query)
@@ -35,7 +46,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
 
         public bool Delete(int movieId)
         {
-            return _repositoryWrapper.Delete(_repositoryWrapper.ReadByID(movieId));
+            return _repositoryWrapper.Delete(_repositoryWrapper.ReadMovieByID(movieId));
         }       
     }
 }

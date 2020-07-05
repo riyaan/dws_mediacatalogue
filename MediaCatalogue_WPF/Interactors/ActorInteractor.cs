@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace MediaCatalogue_WPF.Interactors
 {
-    public class GenreInteractor: IGenreInteractor
+    public class ActorInteractor: IActorInteractor
     {
-        public ResponseModel<Genre> AddGenre(GenreRequestModel requestModel)
+        public ResponseModel<Actor> AddActor(ActorRequestModel requestModel)
         {
             RestClient client = new RestClient("http://localhost:8000/api/movie");
 
-            RestRequest request = new RestRequest("AddGenre", Method.POST);            
+            RestRequest request = new RestRequest("AddActor", Method.POST);            
 
             string json = JsonConvert.SerializeObject(requestModel);
 
             request.AddJsonBody(json);
             var response = client.Execute(request);
 
-            ResponseModel<Genre> responseModel = new ResponseModel<Genre>();
-            responseModel.Data.Add(JsonConvert.DeserializeObject<Genre>(response.Content));
+            ResponseModel<Actor> responseModel = new ResponseModel<Actor>();
+            responseModel.Data.Add(JsonConvert.DeserializeObject<Actor>(response.Content));
 
             if (response.IsSuccessful)
                 responseModel.Message = response.StatusDescription;

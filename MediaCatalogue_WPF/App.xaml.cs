@@ -24,6 +24,8 @@ namespace MediaCatalogue_WPF
             this.container = new StandardKernel();
             container.Bind<ISearchInteractor>().To<SearchInteractor>().InTransientScope();
             container.Bind<IGenreInteractor>().To<GenreInteractor>().InTransientScope();
+            container.Bind<IActorInteractor>().To<ActorInteractor>().InTransientScope();
+            container.Bind<ICrewInteractor>().To<CrewInteractor>().InTransientScope();
         }
 
         private void ComposeObjects()

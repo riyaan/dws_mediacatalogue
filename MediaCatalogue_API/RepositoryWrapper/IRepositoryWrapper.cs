@@ -6,9 +6,23 @@ namespace MediaCatalogue_API.RepositoryWrapper
     {
         int InsertMovie(TEntity entity);
         int InsertGenre(TEntity entity);
+        int InsertActor(TEntity entity);
+        int InsertCrew(TEntity entity);
+
+        int InsertActorMovie(int actorId, int movieId);
+        int InsertCrewMovie(int crewId, int movieId);
+
         List<TEntity> ReadAll(string queryString);
-        TEntity ReadByID(object id);
+
+        TEntity ReadMovieByID(object id);
+        TEntity ReadGenreByID(object id);
+        TEntity ReadActorByID(object id);
+        TEntity ReadCrewByID(object id);
+
         List<TEntity> ReadGenreByName(object name);
+        List<TEntity> ReadActorByName(object name);
+        List<TEntity> ReadCrewByName(object name);
+
         bool Update(TEntity entity);
         bool Delete(TEntity entityToDelete);        
     }

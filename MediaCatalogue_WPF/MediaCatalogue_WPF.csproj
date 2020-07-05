@@ -92,7 +92,11 @@
     <Compile Include="Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interactors\ActorInteractor.cs" />
+    <Compile Include="Interactors\CrewInteractor.cs" />
     <Compile Include="Interactors\GenreInteractor.cs" />
+    <Compile Include="Interactors\IActorInteractor.cs" />
+    <Compile Include="Interactors\ICrewInteractor.cs" />
     <Compile Include="Interactors\IGenreInteractor.cs" />
     <Compile Include="Interactors\SearchInteractor.cs" />
     <Compile Include="Interactors\MovieInteractor.cs" />

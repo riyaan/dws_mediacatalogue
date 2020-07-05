@@ -37,12 +37,19 @@ namespace MediaCatalogue_API.Tests.Controllers
 
             RepositoryWrapper<Genre> rwG = new RepositoryWrapper<Genre>();
             Factory<Genre> factoryG = new Factory<Genre>();
-
             GenreRepository gr = new GenreRepository(rwG, factoryG);
 
-            MovieController mc = new MovieController(mr, gr);
+            RepositoryWrapper<Actor> rwA = new RepositoryWrapper<Actor>();
+            Factory<Actor> factoryA = new Factory<Actor>();
+            ActorRepository ar = new ActorRepository(rwA, factoryA);
 
-            int result = mc.Add(
+            RepositoryWrapper<Crew> rwC = new RepositoryWrapper<Crew>();
+            Factory<Crew> factoryC = new Factory<Crew>();
+            CrewRepository cr = new CrewRepository(rwC, factoryC);
+
+            MovieController mc = new MovieController(mr, gr, ar, cr);
+
+            Movie result = mc.Add(
                 new MovieTestBuilder()
                 {
                      _actors = new List<Actor>() { new ActorTestBuilder() { _name = "Charlize Theron" }.Build() },
@@ -54,7 +61,7 @@ namespace MediaCatalogue_API.Tests.Controllers
                 }.Build()
              );
 
-            Assert.AreNotEqual(0, result);
+            Assert.AreNotEqual(0, result.Id);
         }
 
         //[Test]

@@ -10,13 +10,17 @@ namespace MediaCatalogue_API.Controllers
     {
         private IMovieRepository _movieRepository;
         private IGenreRepository _genreRepository;
+        private IActorRepository _actorRepository;
+        private ICrewRepository _crewRepository;
 
         //public MovieController() { }
 
-        public MovieController(IMovieRepository movieRepository, IGenreRepository genreRepository)
+        public MovieController(IMovieRepository movieRepository, IGenreRepository genreRepository, IActorRepository actorRepository, ICrewRepository crewRepository)
         {
             _movieRepository = movieRepository;
             _genreRepository = genreRepository;
+            _actorRepository = actorRepository;
+            _crewRepository = crewRepository;
         }
 
         // GET: api/movie/welcome
@@ -40,17 +44,39 @@ namespace MediaCatalogue_API.Controllers
             return _genreRepository.GetGenreByName(genreName);
         }
 
+        [HttpGet]
+        public IEnumerable<Actor> SearchActor(string actorName)
+        {
+            return _actorRepository.GetActorByName(actorName);
+        }
+
+        [HttpGet]
+        public IEnumerable<Crew> SearchCrew(string crewName)
+        {
+            return _crewRepository.GetCrewByName(crewName);
+        }
+
         // POST: api/movie/add/movie
         //[Route("add/{movie}")]
         //[HttpPost]
-        public int Add([FromBody] Movie movie)
+        public Movie Add([FromBody] Movie movie)
         {
             return _movieRepository.Add(movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
         }
 
-        public int AddGenre([FromBody] Genre genre)
+        public Genre AddGenre([FromBody] Genre genre)
         {
             return _genreRepository.Add(genre.Name);
+        }
+
+        public Actor AddActor([FromBody] Actor actor)
+        {
+            return _actorRepository.Add(actor.Name);
+        }
+
+        public Crew AddCrew([FromBody] Crew crew)
+        {
+            return _crewRepository.Add(crew.Name);
         }
 
         // DELETE: api/movie/delete/5

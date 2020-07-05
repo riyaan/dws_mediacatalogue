@@ -5,7 +5,8 @@ namespace MediaCatalogue_API.DomainServices.Interface
 {
     public interface ICrewRepository
     {
-        List<Movie> GetAllMovies();
-        List<Role> GetAllRoles();
+        Crew Add(string name);
+        List<Crew> GetAllCrew();
+        List<Crew> GetCrewByName(string name);
     }
 }
