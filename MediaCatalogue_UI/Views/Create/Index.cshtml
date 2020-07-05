@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("DisplayResult", "DisplayCustomer", FormMethod.Post))
+{
+    @Html.ValidationSummary(true);
+
+    @:Enter customer id :- @Html.TextBox("Id")
+    @:Enter customer code :-@Html.TextBox("Code")
+    @:Enter customer Amount :-@Html.TextBox("Amount")
+    <input type="submit" value="Submit" />
+
+}
+

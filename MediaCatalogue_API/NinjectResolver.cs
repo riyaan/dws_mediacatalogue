@@ -59,8 +59,11 @@ namespace MediaCatalogue_API
         private IKernel AddRequestBindings(IKernel kernel)
         {
             kernel.Bind<IRepositoryWrapper<Movie>>().To<RepositoryWrapper<Movie>>().InSingletonScope();
+            kernel.Bind<IRepositoryWrapper<Genre>>().To<RepositoryWrapper<Genre>>().InSingletonScope();
             kernel.Bind<IFactory<Movie>>().To<Factory<Movie>>().InSingletonScope();
+            kernel.Bind<IFactory<Genre>>().To<Factory<Genre>>().InSingletonScope();
             kernel.Bind<IMovieRepository>().To<MovieRepository>().InSingletonScope();
+            kernel.Bind<IGenreRepository>().To<GenreRepository>().InSingletonScope();
 
             return kernel;
         }

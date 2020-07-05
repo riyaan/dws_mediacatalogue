@@ -5,6 +5,8 @@ namespace MediaCatalogue_API.Models
     {
         public Actor() { }
 
+        public Actor(string name) { Name = name; }
+
         public string Name { get; set; }
     }
 }

@@ -34,7 +34,13 @@ namespace MediaCatalogue_API.Tests.Controllers
             Factory<Movie> factory = new Factory<Movie>();
 
             MovieRepository mr = new MovieRepository(rw, factory);
-            MovieController mc = new MovieController(mr);
+
+            RepositoryWrapper<Genre> rwG = new RepositoryWrapper<Genre>();
+            Factory<Genre> factoryG = new Factory<Genre>();
+
+            GenreRepository gr = new GenreRepository(rwG, factoryG);
+
+            MovieController mc = new MovieController(mr, gr);
 
             int result = mc.Add(
                 new MovieTestBuilder()
@@ -48,7 +54,7 @@ namespace MediaCatalogue_API.Tests.Controllers
                 }.Build()
              );
 
-            Assert.AreEqual(1, result);
+            Assert.AreNotEqual(0, result);
         }
 
         //[Test]

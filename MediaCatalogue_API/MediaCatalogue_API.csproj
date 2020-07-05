@@ -209,8 +209,10 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="DomainServices\Implementation\ActorRepository.cs" />
+    <Compile Include="DomainServices\Implementation\GenreRepository.cs" />
     <Compile Include="DomainServices\Implementation\CrewRepository.cs" />
     <Compile Include="DomainServices\Implementation\MovieRepository.cs" />
+    <Compile Include="DomainServices\Interfaces\IGenreRepository.cs" />
     <Compile Include="DomainServices\Interfaces\IMovieRepository.cs" />
     <Compile Include="DomainServices\Interfaces\ICrewRepository.cs" />
     <Compile Include="DomainServices\Interfaces\IActorRepository.cs" />
