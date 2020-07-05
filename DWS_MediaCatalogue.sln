@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database Scripts", "Database Scripts", "{68F375F3-54B7-4EDA-AF37-D1E2D444AF7F}"
 	ProjectSection(SolutionItems) = preProject
 		Database Scripts\setup.sql = Database Scripts\setup.sql
+		Database Scripts\setup_schema_only.sql = Database Scripts\setup_schema_only.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_WPF", "MediaCatalogue_WPF\MediaCatalogue_WPF.csproj", "{1BAC0774-B6E4-45B2-B07F-F4CA2A00FDC0}"
