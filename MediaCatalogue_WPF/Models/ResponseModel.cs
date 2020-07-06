@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 
 namespace MediaCatalogue_WPF.Models
 {
@@ -12,5 +13,7 @@ namespace MediaCatalogue_WPF.Models
         public string Message { get; set; }
 
         public List<T> Data { get; set; }
+
+        public HttpStatusCode StatusCode { get; set; }
     }
 }

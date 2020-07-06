@@ -1,19 +1,17 @@
 ﻿using MediaCatalogue_API.DomainServices.Interface;
 using MediaCatalogue_API.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace MediaCatalogue_API.Controllers
 {
-    //[RoutePrefix("api/movie")]
     public class MovieController : ApiController
     {
         private IMovieRepository _movieRepository;
         private IGenreRepository _genreRepository;
         private IActorRepository _actorRepository;
         private ICrewRepository _crewRepository;
-
-        //public MovieController() { }
 
         public MovieController(IMovieRepository movieRepository, IGenreRepository genreRepository, IActorRepository actorRepository, ICrewRepository crewRepository)
         {
@@ -23,15 +21,11 @@ namespace MediaCatalogue_API.Controllers
             _crewRepository = crewRepository;
         }
 
-        // GET: api/movie/welcome
-        [HttpGet]
         public IEnumerable<string> Welcome()
         {
             return new string[] { "Welcome to the Movie Catalogue" };
         }
 
-        // GET: api/movie/search/Goodfellas
-        //[Route("search/{query}")]
         [HttpGet]
         public IEnumerable<Movie> Search(string query)
         {
@@ -56,12 +50,17 @@ namespace MediaCatalogue_API.Controllers
             return _crewRepository.GetCrewByName(crewName);
         }
 
-        // POST: api/movie/add/movie
-        //[Route("add/{movie}")]
-        //[HttpPost]
         public Movie Add([FromBody] Movie movie)
         {
+            if (movie.Genre.Id == 0)
+                movie.Genre.Id = _genreRepository.GetGenreByName(movie.Genre.Name).FirstOrDefault().Id;
+
             return _movieRepository.Add(movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
+        }
+
+        public Movie Update([FromBody] Movie movie)
+        {
+            return _movieRepository.Edit(movie.Id, movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
         }
 
         public Genre AddGenre([FromBody] Genre genre)
@@ -79,11 +78,9 @@ namespace MediaCatalogue_API.Controllers
             return _crewRepository.Add(crew.Name);
         }
 
-        // DELETE: api/movie/delete/5
-        //[Route("delete/{id}")]
-        //[HttpDelete]
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            return _movieRepository.Delete(id);
         }
     }
 }

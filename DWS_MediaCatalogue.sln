@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_API", "MediaCatalogue_API\MediaCatalogue_API.csproj", "{45E0B950-C6C0-497E-944E-D93E2792C6AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_UI", "MediaCatalogue_UI\MediaCatalogue_UI.csproj", "{98214C9F-A2F7-4778-B0B4-88372697D318}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BB1EA7EC-1063-4B5F-B690-F8E23B7D6398}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_API.Tests", "MediaCatalogue_API.Tests\MediaCatalogue_API.Tests.csproj", "{028F241E-79A4-439D-8644-543A4A7C826A}"
@@ -21,6 +19,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_WPF", "Media
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalogue_WPF.Tests", "MediaCatalogue_WPF.Tests\MediaCatalogue_WPF.Tests.csproj", "{22C885D2-1073-4521-B829-4FCD4F5A092B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{5B2370DC-3980-4190-BC8A-6079D8ABAA22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Json Payloads", "Json Payloads", "{7BFF1BE7-D8B4-4BDE-9073-48F8AD5945AE}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Json Payloads\AddMovie.json = Documentation\Json Payloads\AddMovie.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML", "UML", "{E883085D-C258-4E8B-BDE3-322E3E458B5A}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\UML\ERD.png = Documentation\UML\ERD.png
+		Documentation\UML\UseCase.drawio = Documentation\UML\UseCase.drawio
+		Documentation\UML\UseCase.pdf = Documentation\UML\UseCase.pdf
+		Documentation\UML\Wireframes.drawio = Documentation\UML\Wireframes.drawio
+		Documentation\UML\Wireframes.pdf = Documentation\UML\Wireframes.pdf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +45,6 @@ Global
 		{45E0B950-C6C0-497E-944E-D93E2792C6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45E0B950-C6C0-497E-944E-D93E2792C6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45E0B950-C6C0-497E-944E-D93E2792C6AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98214C9F-A2F7-4778-B0B4-88372697D318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98214C9F-A2F7-4778-B0B4-88372697D318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98214C9F-A2F7-4778-B0B4-88372697D318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98214C9F-A2F7-4778-B0B4-88372697D318}.Release|Any CPU.Build.0 = Release|Any CPU
 		{028F241E-79A4-439D-8644-543A4A7C826A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{028F241E-79A4-439D-8644-543A4A7C826A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{028F241E-79A4-439D-8644-543A4A7C826A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,5 +64,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{028F241E-79A4-439D-8644-543A4A7C826A} = {BB1EA7EC-1063-4B5F-B690-F8E23B7D6398}
 		{22C885D2-1073-4521-B829-4FCD4F5A092B} = {BB1EA7EC-1063-4B5F-B690-F8E23B7D6398}
+		{7BFF1BE7-D8B4-4BDE-9073-48F8AD5945AE} = {5B2370DC-3980-4190-BC8A-6079D8ABAA22}
+		{E883085D-C258-4E8B-BDE3-322E3E458B5A} = {5B2370DC-3980-4190-BC8A-6079D8ABAA22}
 	EndGlobalSection
 EndGlobal

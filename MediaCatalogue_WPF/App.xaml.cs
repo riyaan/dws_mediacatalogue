@@ -1,4 +1,5 @@
 ﻿using MediaCatalogue_WPF.Interactors;
+using MediaCatalogue_WPF.Interactors.Interfaces;
 using Ninject;
 using System.Windows;
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaCatalogue_WPF"
         mc:Ignorable="d"
-        Title="Create" Height="300" Width="300">
+        Title="Add a new Movie" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,-0.4,-8.6" Height="283" VerticalAlignment="Top">
         <Label x:Name="label" Content="Title" HorizontalAlignment="Left" Margin="20,35,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
         <Label x:Name="label_Copy" Content="Year" HorizontalAlignment="Left" Margin="20,69,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
@@ -15,8 +15,8 @@
         <Label x:Name="label_Copy4" Content="Location" HorizontalAlignment="Left" Margin="20,205,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
         <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="23" Margin="107,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtYear" HorizontalAlignment="Left" Height="23" Margin="107,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnAddMovie" Content="Add Movie" HorizontalAlignment="Left" Margin="118,241,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.147,-0.128" Click="button_Click" IsDefault="True"/>
-        <TextBox x:Name="txtLocation" HorizontalAlignment="Left" Height="23" Margin="107,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.134,-0.284"/>
+        <Button x:Name="btnAddMovie" Content="Ok" HorizontalAlignment="Left" Margin="118,241,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.147,-0.128" Click="button_Click" IsDefault="True"/>
+        <TextBox x:Name="txtLocation" HorizontalAlignment="Left" Height="23" Margin="107,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.134,-0.284" ToolTip="E.g DVD, C:\movies, \\fileshare\movies"/>
         <TextBox x:Name="txtActor" HorizontalAlignment="Left" Height="23" Margin="107,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtDirector" HorizontalAlignment="Left" Height="23" Margin="107,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtGenre" HorizontalAlignment="Left" Height="23" Margin="107,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

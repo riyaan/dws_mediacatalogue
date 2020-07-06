@@ -23,7 +23,9 @@ namespace MediaCatalogue_API.RepositoryWrapper
         List<TEntity> ReadActorByName(object name);
         List<TEntity> ReadCrewByName(object name);
 
-        bool Update(TEntity entity);
+        int UpdateMovie(TEntity entity);
+
+
         bool Delete(TEntity entityToDelete);        
     }
 }

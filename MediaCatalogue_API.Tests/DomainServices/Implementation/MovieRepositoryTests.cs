@@ -9,18 +9,16 @@ using System.Collections.Generic;
 
 namespace MediaCatalogue_API.Tests.DomainServices.Implementation
 {
-    [TestFixture]
+    [TestFixture]    
     public class MovieRepositoryTests
     {
         private Mock<IRepositoryWrapper<Movie>> _repositoryWrapper;
-        //private Mock<IFactory<Movie>> _factory;
         IFactory<Movie> _factory;
 
         [SetUp]
         public void SetUp()
         {
             _repositoryWrapper = new Mock<IRepositoryWrapper<Movie>>();
-            //_factory = new Mock<IFactory<Movie>>(); 
             _factory = new Factory<Movie>();           
         }
 
@@ -28,6 +26,8 @@ namespace MediaCatalogue_API.Tests.DomainServices.Implementation
         public void AddMovie_Success()
         {
             _repositoryWrapper.Setup(foo => foo.InsertMovie(It.IsAny<Movie>())).Returns(1);
+
+            _repositoryWrapper.Setup(foo => foo.ReadMovieByID(It.IsAny<int>())).Returns(new MovieTestBuilder() { _id = 1 }.Build());
 
             MovieRepository mr = new MovieRepository(_repositoryWrapper.Object, _factory);
 
@@ -55,16 +55,18 @@ namespace MediaCatalogue_API.Tests.DomainServices.Implementation
         [Test]
         public void EditMovie_Success()
         {
-            _repositoryWrapper.Setup(foo => foo.Update(It.IsAny<Movie>())).Returns(true);
+            _repositoryWrapper.Setup(foo => foo.UpdateMovie(It.IsAny<Movie>())).Returns(1);
+
+            _repositoryWrapper.Setup(foo => foo.ReadMovieByID(It.IsAny<int>())).Returns(new MovieTestBuilder() { _location = "DVD" }.Build());
 
             MovieRepository mr = new MovieRepository(_repositoryWrapper.Object, _factory);
 
-            bool result = mr.Edit("Goodfellas", 1990, "DVD",
+            Movie result = mr.Edit(1, "Goodfellas", 1990, "DVD",
                 new List<Actor>() { new ActorTestBuilder() { }.Build() },
                 new List<Crew>() { new CrewTestBuilder() { }.Build() },
                 new GenreTestBuilder() { }.Build());
 
-            Assert.AreEqual(true, result);
+            Assert.AreEqual("DVD", result.Location);
         }
 
         [Test]

@@ -117,9 +117,36 @@ namespace MediaCatalogue_API.RepositoryWrapper
             }
         }
 
-        public bool Delete(TEntity entityToDelete)
+        public bool Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            Movie movie = entity as Movie;
+
+            SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int);
+            idParam.Value = Convert.ToInt32(movie.Id);
+
+            SqlParameter[] parameters = { idParam };
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand()
+                {
+                    Connection = connection,
+                    CommandText = "usp_DeleteMovie",
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddRange(parameters);
+
+                connection.Open();
+
+                bool success = false;
+
+                int result = (int)command.ExecuteScalar();
+
+                if(result > 0) success = true;
+
+                return success;
+            }
         }
 
         public List<TEntity> ReadAll(string queryString)
@@ -209,9 +236,42 @@ namespace MediaCatalogue_API.RepositoryWrapper
             }
         }
 
-        public bool Update(TEntity entity)
+        public int UpdateMovie(TEntity entity)
         {
-            throw new NotImplementedException();
+            Movie movie = entity as Movie;
+
+            SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int);
+            idParam.Value = Convert.ToInt32(movie.Id);
+
+            SqlParameter titleParam = new SqlParameter("@title", SqlDbType.VarChar);
+            titleParam.Value = movie.Title;
+
+            SqlParameter yearParam = new SqlParameter("@year", SqlDbType.Int);
+            yearParam.Value = Convert.ToInt32(movie.Year);
+
+            SqlParameter locationParam = new SqlParameter("@location", SqlDbType.VarChar);
+            locationParam.Value = movie.Location;
+
+            SqlParameter genreParam = new SqlParameter("@genre", SqlDbType.Int);
+            genreParam.Value = Convert.ToInt32(movie.Genre.Id);
+
+            SqlParameter[] parameters = { idParam, titleParam, yearParam, locationParam, genreParam };
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand()
+                {
+                    Connection = connection,
+                    CommandText = "usp_UpdateMovie",
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                command.Parameters.AddRange(parameters);
+
+                connection.Open();
+
+                return (int)command.ExecuteScalar();
+            }
         }
 
         public TEntity ReadGenreByID(object id)

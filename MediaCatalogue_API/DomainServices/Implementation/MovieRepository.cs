@@ -28,7 +28,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
 
             // TODO: insert crewmovie
             foreach (Crew crewMember in crew)
-                _repositoryWrapper.InsertActorMovie(crewMember.Id, movieId);
+                _repositoryWrapper.InsertCrewMovie(crewMember.Id, movieId);
 
             return _repositoryWrapper.ReadMovieByID(movieId);
         }
@@ -38,10 +38,20 @@ namespace MediaCatalogue_API.DomainServices.Interface
             return _repositoryWrapper.ReadAll(query);
         }
 
-        public bool Edit(string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
+        public Movie Edit(int id,  string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
         {
-            Movie movie = _factory.Create(new object[] { title, year, location, actors, crew, genre });
-            return _repositoryWrapper.Update(movie);
+            Movie movie = _repositoryWrapper.ReadMovieByID(id);
+
+            movie.Title = title;
+            movie.Year = year;
+            movie.Location = location;
+            movie.Actors = actors;
+            movie.Crew = crew;
+            movie.Genre = genre;
+                        
+            _repositoryWrapper.UpdateMovie(movie);
+
+            return _repositoryWrapper.ReadMovieByID(id);
         }
 
         public bool Delete(int movieId)

@@ -1,19 +1,10 @@
 ﻿using MediaCatalogue_API.Models;
 using MediaCatalogue_WPF.Interactors;
+using MediaCatalogue_WPF.Interactors.Interfaces;
 using MediaCatalogue_WPF.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MediaCatalogue_WPF
 {
@@ -39,10 +30,10 @@ namespace MediaCatalogue_WPF
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             MovieRequestModel request = new MovieRequestModel()
             {
-                Actors = new List<string>() { txtActor.Text },
+                Actors = new List<string>(),
                 Director = txtDirector.Text,
                 Genre = txtGenre.Text,
                 Location = txtLocation.Text,
@@ -50,8 +41,33 @@ namespace MediaCatalogue_WPF
                 Year = Convert.ToInt32(txtYear.Text)
             };
 
+            string[] actors = txtActor.Text.Split(',');
+            request.Actors.AddRange(actors);
+
             MovieInteractor mi = new MovieInteractor(_searchInteractor, _genreInteractor, _actorInteractor, _crewInteractor);
             ResponseModel<Movie> response = mi.AddMovie(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                Success();
+            else
+                Failure(response.Message);
+        }
+
+        private void Success()
+        {
+            MessageBox.Show("Operation completed successfully.");
+
+            txtActor.Clear();
+            txtDirector.Clear();
+            txtGenre.Clear();
+            txtLocation.Clear();
+            txtTitle.Clear();
+            txtYear.Clear();
+        }
+
+        private void Failure(string message)
+        {
+            MessageBox.Show(string.Format("An error occurred. {0}. Please try again.", message));
         }
     }
 }

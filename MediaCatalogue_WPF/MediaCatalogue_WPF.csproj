@@ -77,6 +77,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Update.xaml.cs">
+      <DependentUpon>Update.xaml</DependentUpon>
+    </Compile>
     <Page Include="Create.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,20 +98,28 @@
     <Compile Include="Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interactors\ActorInteractor.cs" />
-    <Compile Include="Interactors\CrewInteractor.cs" />
-    <Compile Include="Interactors\GenreInteractor.cs" />
-    <Compile Include="Interactors\IActorInteractor.cs" />
-    <Compile Include="Interactors\ICrewInteractor.cs" />
-    <Compile Include="Interactors\IGenreInteractor.cs" />
-    <Compile Include="Interactors\SearchInteractor.cs" />
-    <Compile Include="Interactors\MovieInteractor.cs" />
-    <Compile Include="Interactors\IMovieInteractor.cs" />
-    <Compile Include="Interactors\ISearchInteractor.cs" />
+    <Compile Include="Interactors\Implementation\ActorInteractor.cs" />
+    <Compile Include="Interactors\Implementation\CrewInteractor.cs" />
+    <Compile Include="Interactors\Implementation\GenreInteractor.cs" />
+    <Compile Include="Interactors\Interfaces\IActorInteractor.cs" />
+    <Compile Include="Interactors\Interfaces\ICrewInteractor.cs" />
+    <Compile Include="Interactors\Interfaces\IGenreInteractor.cs" />
+    <Compile Include="Interactors\Implementation\SearchInteractor.cs" />
+    <Compile Include="Interactors\Implementation\MovieInteractor.cs" />
+    <Compile Include="Interactors\Interfaces\IMovieInteractor.cs" />
+    <Compile Include="Interactors\Interfaces\ISearchInteractor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Search.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Update.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\GenreRequestModel.cs" />

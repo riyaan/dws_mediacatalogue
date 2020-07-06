@@ -1,18 +1,5 @@
-﻿using MediaCatalogue_WPF.Interactors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediaCatalogue_WPF.Interactors.Interfaces;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MediaCatalogue_WPF
 {
@@ -39,7 +26,9 @@ namespace MediaCatalogue_WPF
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            Search create = new Search(_searchInteractor, _genreInteractor, _actorInteractor, _crewInteractor,
+                txtSearchQuery.Text);
+            create.ShowDialog();
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)

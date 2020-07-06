@@ -1,16 +1,16 @@
-﻿<Window x:Class="MediaCatalogue_WPF.MainWindow"
+﻿<Window x:Name="DWS_Catalogue" x:Class="MediaCatalogue_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaCatalogue_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <ComboBox x:Name="cmbSearchCategory" HorizontalAlignment="Left" Margin="30,133,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtSearchQuery" HorizontalAlignment="Left" Height="23" Margin="155,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258"/>
-        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="418,135,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.654" Click="btnSearch_Click"/>
-        <Button x:Name="btnCreate" Content="Add" HorizontalAlignment="Left" Margin="222,210,0,0" VerticalAlignment="Top" Width="75" Click="btnCreate_Click"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="418,135,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.107,0.654" Click="btnSearch_Click" IsDefault="True"/>
+        <Button x:Name="btnCreate" Content="Add a new movie" HorizontalAlignment="Left" Margin="203,214,0,0" VerticalAlignment="Top" Width="106" Click="btnCreate_Click"/>
 
     </Grid>
 </Window>

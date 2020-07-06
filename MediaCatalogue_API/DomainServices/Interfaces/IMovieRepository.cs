@@ -7,7 +7,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
     {
         Movie Add(string title, int year, string location, List<Actor> actors, List<Crew> _crew, Genre _genre);
         List<Movie> Find(string query);
-        bool Edit(string title, int year, string location, List<Actor> actors, List<Crew> _crew, Genre _genre);
+        Movie Edit(int id, string title, int year, string location, List<Actor> actors, List<Crew> _crew, Genre _genre);
         bool Delete(int movieId);
     }
 }
