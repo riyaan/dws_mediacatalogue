@@ -2,6 +2,7 @@
 using MediaCatalogue_API.Models;
 using MediaCatalogue_API.RepositoryWrapper;
 using System.Collections.Generic;
+using System;
 
 namespace MediaCatalogue_API.DomainServices.Interface
 {
@@ -38,25 +39,35 @@ namespace MediaCatalogue_API.DomainServices.Interface
             return _repositoryWrapper.ReadMovieByTitle(query);
         }
 
-        public Movie Edit(int id,  string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
+        public Movie Edit(Movie movie)
         {
-            Movie movie = _repositoryWrapper.ReadMovieByID(id);
+            Movie movieResult = _repositoryWrapper.ReadMovieByID(movie.Id);
+            
+            foreach(Actor a in movie.Actors)
+            {
+                _repositoryWrapper.ReadActorByID(a.Id);
+            }
 
-            movie.Title = title;
-            movie.Year = year;
-            movie.Location = location;
-            movie.Actors = actors;
-            movie.Crew = crew;
-            movie.Genre = genre;
+            movie.Title = movie.Title;
+            movie.Year = movie.Year;
+            movie.Location = movie.Location;
+            movie.Actors = movie.Actors;
+            movie.Crew = movie.Crew;
+            movie.Genre = movie.Genre;
                         
             _repositoryWrapper.UpdateMovie(movie);
 
-            return _repositoryWrapper.ReadMovieByID(id);
+            return _repositoryWrapper.ReadMovieByID(movie.Id);
         }
 
         public bool Delete(int movieId)
         {
             return _repositoryWrapper.Delete(_repositoryWrapper.ReadMovieByID(movieId));
-        }       
+        }
+
+        public Movie GetMovieById(int movieId)
+        {
+            return _repositoryWrapper.ReadMovieByID(movieId);
+        }
     }
 }

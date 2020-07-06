@@ -34,5 +34,10 @@ namespace MediaCatalogue_API.DomainServices.Interface
         {
             return _repositoryWrapper.ReadGenreByName(name);
         }
+
+        public Genre GetGenreById(int genreId)
+        {
+            return _repositoryWrapper.ReadGenreByID(genreId);
+        }
     }
 }

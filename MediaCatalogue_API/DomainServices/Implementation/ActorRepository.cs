@@ -39,5 +39,15 @@ namespace MediaCatalogue_API.DomainServices.Interface
         {
             throw new NotImplementedException();
         }
+
+        public List<Actor> GetActorsByMovie(string movieName)
+        {
+            return _repositoryWrapper.ReadActorsByMovie(movieName);
+        }
+
+        public Actor GetActorById(int actorId)
+        {
+            return _repositoryWrapper.ReadActorByID(actorId);
+        }        
     }
 }

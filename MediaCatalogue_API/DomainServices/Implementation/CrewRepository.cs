@@ -35,5 +35,15 @@ namespace MediaCatalogue_API.DomainServices.Interface
         {
             return _repositoryWrapper.ReadCrewByName(name);
         }
+
+        public List<Crew> GetCrewByMovie(string name)
+        {
+            return _repositoryWrapper.ReadCrewByMovie(name);
+        }
+
+        public Crew GetCrewById(int crewId)
+        {
+            return _repositoryWrapper.ReadCrewByID(crewId);
+        }
     }
 }

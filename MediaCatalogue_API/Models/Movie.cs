@@ -28,5 +28,7 @@ namespace MediaCatalogue_API.Models
 
         public Genre Genre { get; set; }
 
+        public UpdateId UpdateId { get; set; }
+
     }
 }

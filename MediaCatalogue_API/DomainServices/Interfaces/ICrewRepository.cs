@@ -8,5 +8,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
         Crew Add(string name);
         List<Crew> GetAllCrew();
         List<Crew> GetCrewByName(string name);
+        Crew GetCrewById(int crewId);
+        List<Crew> GetCrewByMovie(string name);
     }
 }

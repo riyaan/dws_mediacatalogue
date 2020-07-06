@@ -61,10 +61,15 @@ namespace MediaCatalogue_API.Tests.DomainServices.Implementation
 
             MovieRepository mr = new MovieRepository(_repositoryWrapper.Object, _factory);
 
-            Movie result = mr.Edit(1, "Goodfellas", 1990, "DVD",
-                new List<Actor>() { new ActorTestBuilder() { }.Build() },
-                new List<Crew>() { new CrewTestBuilder() { }.Build() },
-                new GenreTestBuilder() { }.Build());
+            Movie result = mr.Edit(new MovieTestBuilder()
+            {
+                _id = 1, _title = "Goodfellas", _year = 1990, _location = "DVD",
+                _actors = new List<Actor>() { new ActorTestBuilder() { }.Build() },
+                _crew = new List<Crew>() { new CrewTestBuilder() { }.Build() },
+                _genre = new GenreTestBuilder() { }.Build()
+            }.Build());
+
+            
 
             Assert.AreEqual("DVD", result.Location);
         }

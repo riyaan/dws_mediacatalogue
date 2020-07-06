@@ -15,5 +15,15 @@ namespace MediaCatalogue_WPF.Models
         public List<string> Actors { get; set; }
         public string Director { get; set; }
         public string Genre;
+
+        public UpdateId UpdateId { get; set; }
+    }
+
+    public class UpdateId
+    {
+        public int MovieId { get; set; }
+        public Dictionary<int, string> ActorIds { get; set; }
+        public int DirectorId { get; set; }
+        public int GenreId { get; set; }
     }
 }

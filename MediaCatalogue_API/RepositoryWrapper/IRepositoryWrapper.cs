@@ -24,6 +24,9 @@ namespace MediaCatalogue_API.RepositoryWrapper
         List<TEntity> ReadActorByName(object name);
         List<TEntity> ReadCrewByName(object name);
 
+        List<TEntity> ReadActorsByMovie(object name);
+        List<TEntity> ReadCrewByMovie(object name);
+
         int UpdateMovie(TEntity entity);
 
 

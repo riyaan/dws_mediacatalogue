@@ -222,6 +222,7 @@
     <Compile Include="Models\Crew.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\UpdateId.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NinjectResolver.cs" />
     <Compile Include="Program.cs" />

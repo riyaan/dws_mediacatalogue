@@ -37,6 +37,26 @@ namespace MediaCatalogue_API.Controllers
         public IEnumerable<Movie> SearchMovieByTitle(string query)
         {
             return _movieRepository.Find(query);
+        }        
+
+        
+
+        [HttpGet]
+        public IEnumerable<Actor> SearchActorsByMovie(string query)
+        {
+            return _actorRepository.GetActorsByMovie(query);
+        }
+
+        [HttpGet]
+        public IEnumerable<Crew> SearchCrewByMovie(string query)
+        {
+            return _crewRepository.GetCrewByMovie(query);
+        }
+
+        [HttpGet]
+        public IEnumerable<Crew> SearchCrew(string crewName)
+        {
+            return _crewRepository.GetCrewByName(crewName);
         }
 
         [HttpGet]
@@ -52,9 +72,27 @@ namespace MediaCatalogue_API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Crew> SearchCrew(string crewName)
+        public Actor SearchActorById(int actorId)
         {
-            return _crewRepository.GetCrewByName(crewName);
+            return _actorRepository.GetActorById(actorId);
+        }
+
+        [HttpGet]
+        public Crew SearchCrewById(int crewId)
+        {
+            return _crewRepository.GetCrewById(crewId);
+        }
+
+        [HttpGet]
+        public Genre SearchGenreById(int genreId)
+        {
+            return _genreRepository.GetGenreById(genreId);
+        }
+
+        [HttpGet]
+        public Movie SearchMovieById(int movieId)
+        {
+            return _movieRepository.GetMovieById(movieId);
         }
 
         public Movie Add([FromBody] Movie movie)
@@ -71,7 +109,28 @@ namespace MediaCatalogue_API.Controllers
         {
             string json = JsonConvert.SerializeObject(movie);
 
-            return _movieRepository.Edit(movie.Id, movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
+            // get the genre to update
+            Genre genre = _genreRepository.GetGenreById(movie.UpdateId.GenreId);
+            genre.Name = movie.Genre.Name;
+
+            // get the crew to update
+            Crew crew = _crewRepository.GetCrewById(movie.UpdateId.DirectorId);
+            crew.Name = movie.Crew[0].Name;
+
+            List<Actor> actors = new List<Actor>();
+
+            // get the actors to update
+            foreach(var actor in movie.UpdateId.ActorIds)
+            {
+                Actor a = _actorRepository.GetActorById(actor.Key);
+                actors.Add(new Actor() { Name = actor.Value });
+            }
+
+            movie.Genre = genre;
+            movie.Crew = new List<Crew>() { crew };
+            movie.Actors = actors;
+
+            return _movieRepository.Edit(movie);
         }
 
         public Genre AddGenre([FromBody] Genre genre)

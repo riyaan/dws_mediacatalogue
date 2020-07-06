@@ -252,10 +252,20 @@ namespace MediaCatalogue_API.RepositoryWrapper
             SqlParameter locationParam = new SqlParameter("@location", SqlDbType.VarChar);
             locationParam.Value = movie.Location;
 
-            SqlParameter genreParam = new SqlParameter("@genre", SqlDbType.Int);
-            genreParam.Value = Convert.ToInt32(movie.Genre.Id);
+            SqlParameter genreIdParam = new SqlParameter("@genreId", SqlDbType.Int);
+            genreIdParam.Value = Convert.ToInt32(movie.Genre.Id);
 
-            SqlParameter[] parameters = { idParam, titleParam, yearParam, locationParam, genreParam };
+            SqlParameter crewIdParam = new SqlParameter("@crewId", SqlDbType.Int);
+            crewIdParam.Value = Convert.ToInt32(movie.Crew[0].Id);
+
+            SqlParameter genreNameParam = new SqlParameter("@genreName", SqlDbType.VarChar);
+            genreNameParam.Value = movie.Genre.Name;
+
+            SqlParameter directorNameParam = new SqlParameter("@directorName", SqlDbType.VarChar);
+            directorNameParam.Value = movie.Crew[0].Name;
+
+            SqlParameter[] parameters = { idParam, titleParam, yearParam, locationParam, genreIdParam,
+            crewIdParam, genreNameParam, directorNameParam};
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -377,16 +387,60 @@ namespace MediaCatalogue_API.RepositoryWrapper
 
             foreach (DataRow drc in dt.Rows)
             {
+                List<Actor> actors = new List<Actor>();
                 movies.Add(new Movie()
                 {
+                    Actors = ReadActorsByMovie(drc[0].ToString()) as List<Actor>,
+                    Crew = ReadCrewByMovie(drc[0].ToString()) as List<Crew>,
                     Title = drc[0].ToString(),
                     Location = drc[1].ToString(),
                     Year = Convert.ToInt32(drc[2]),
-                    Genre = new Genre() { Name = drc[3].ToString() }
+                    Genre = new Genre() { Id = Convert.ToInt32(drc[4]), Name = drc[3].ToString() },
+                     Id = Convert.ToInt32(drc[5])
                 });
             }
 
             return movies as List<TEntity>;
+        }
+
+        public List<TEntity> ReadActorsByMovie(object name)
+        {
+            SqlParameter titleParam = new SqlParameter("@query", SqlDbType.VarChar);
+            titleParam.Value = name.ToString();
+
+            SqlParameter[] parameters = { titleParam };
+
+            DataSet ds = Reader(parameters, "usp_SearchActorsByMovie");
+            DataTable dt = ds.Tables[0];
+
+            List<Actor> actor = new List<Actor>();
+
+            foreach (DataRow drc in dt.Rows)
+            {
+                actor.Add(new Actor() { Id = Convert.ToInt32(drc[0]), Name = drc[1].ToString() });
+            }
+
+            return actor as List<TEntity>;
+        }
+
+        public List<TEntity> ReadCrewByMovie(object name)
+        {
+            SqlParameter titleParam = new SqlParameter("@query", SqlDbType.VarChar);
+            titleParam.Value = name.ToString();
+
+            SqlParameter[] parameters = { titleParam };
+
+            DataSet ds = Reader(parameters, "usp_SearchCrewByMovie");
+            DataTable dt = ds.Tables[0];
+
+            List<Crew> crew = new List<Crew>();
+
+            foreach (DataRow drc in dt.Rows)
+            {
+                crew.Add(new Crew() { Id = Convert.ToInt32(drc[0]), Name = drc[1].ToString() });
+            }
+
+            return crew as List<TEntity>;
         }
     }
 }

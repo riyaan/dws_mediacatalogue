@@ -10,7 +10,7 @@
         <Label x:Name="lblResults" Content="Search results" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="274" FontWeight="Bold" FontSize="16"/>
         <DataGrid x:Name="dgSearchResults" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Height="208" Width="502"/>
         <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="517,111,0,0" VerticalAlignment="Top" Width="75" Click="btnEdit_Click"/>
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="516,145,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="516,145,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
 
     </Grid>
 </Window>

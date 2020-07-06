@@ -10,5 +10,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
         Actor Add(string actorName);
         List<Actor> GetAllActors();
         List<Actor> GetActorByName(string actorName);
+        Actor GetActorById(int actorId);
+        List<Actor> GetActorsByMovie(string movieName);
     }
 }

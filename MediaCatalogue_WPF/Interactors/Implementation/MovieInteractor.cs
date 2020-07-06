@@ -93,7 +93,7 @@ namespace MediaCatalogue_WPF.Interactors
         public ResponseModel<Movie> UpdateMovie(MovieRequestModel request)
         {
             // retrieve the movie
-            ResponseModel<Movie> movieSearchResult = _searchInteractor.SearchMovieByTitle(request.Title);
+            ResponseModel<Movie> movieSearchResult = _searchInteractor.SearchMovieById(request.UpdateId.MovieId);
 
             if (movieSearchResult.Data.Count.Equals(0))
                 return movieSearchResult;
@@ -101,11 +101,26 @@ namespace MediaCatalogue_WPF.Interactors
 
             Movie mappedRequest = new Movie()
             {
-                Id = movieSearchResult.Data[0].Id,    
+                Id = request.UpdateId.MovieId,
                 Title = request.Title,
                 Year = request.Year,
-                Location = request.Location
+                Genre = new Genre() { Id = request.UpdateId.GenreId, Name = request.Genre },
+                Crew = new List<Crew>() { new Crew() { Id = request.UpdateId.DirectorId, Name = request.Director } },
+                Actors = new List<Actor>(),
+                Location = request.Location,
+                UpdateId = new MediaCatalogue_API.Models.UpdateId()
+                {
+                    ActorIds = request.UpdateId.ActorIds,
+                    DirectorId = request.UpdateId.DirectorId,
+                    GenreId = request.UpdateId.GenreId,
+                    MovieId = request.UpdateId.MovieId
+                }
             };
+
+            foreach(var actor in request.UpdateId.ActorIds)
+            {
+                mappedRequest.Actors.Add(new Actor() { Id = actor.Key, Name = actor.Value });
+            }
 
             string json = JsonConvert.SerializeObject(mappedRequest);
 

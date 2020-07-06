@@ -1,4 +1,5 @@
 ﻿using MediaCatalogue_WPF.Interactors.Interfaces;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace MediaCatalogue_WPF
@@ -13,6 +14,9 @@ namespace MediaCatalogue_WPF
         private IActorInteractor _actorInteractor;
         private ICrewInteractor _crewInteractor;
 
+        private List<string> _categories = new List<string>();
+        
+
         public MainWindow(ISearchInteractor searchInteractor, IGenreInteractor genreInteractor, IActorInteractor actorInteractor,
             ICrewInteractor crewInteractor)
         {
@@ -22,6 +26,14 @@ namespace MediaCatalogue_WPF
             _genreInteractor = genreInteractor;
             _actorInteractor = actorInteractor;
             _crewInteractor = crewInteractor;
+
+            _categories.Add("All");
+            _categories.Add("Movie");
+            _categories.Add("Actor");
+            _categories.Add("Director");
+
+            cmbSearchCategory.ItemsSource = _categories;
+            cmbSearchCategory.SelectedIndex = 0;
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
