@@ -34,6 +34,12 @@ namespace MediaCatalogue_API.Controllers
         }
 
         [HttpGet]
+        public IEnumerable<Movie> SearchMovieByTitle(string query)
+        {
+            return _movieRepository.Find(query);
+        }
+
+        [HttpGet]
         public IEnumerable<Genre> SearchGenre(string genreName)
         {
             return _genreRepository.GetGenreByName(genreName);

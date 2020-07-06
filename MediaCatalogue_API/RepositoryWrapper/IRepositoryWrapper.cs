@@ -13,6 +13,7 @@ namespace MediaCatalogue_API.RepositoryWrapper
         int InsertCrewMovie(int crewId, int movieId);
 
         List<TEntity> ReadAll(string queryString);
+        List<TEntity> ReadMovieByTitle(string queryString);
 
         TEntity ReadMovieByID(object id);
         TEntity ReadGenreByID(object id);

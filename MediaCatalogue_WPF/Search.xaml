@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaCatalogue_WPF"
         mc:Ignorable="d"
-        Title="Search" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Search" Height="300" Width="607.281" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="lblResults" Content="Search results" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="274" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="dgSearchResults" ItemsSource="{Binding actors}" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Height="208" Width="274"/>
+        <DataGrid x:Name="dgSearchResults" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Height="208" Width="502"/>
+        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="517,111,0,0" VerticalAlignment="Top" Width="75" Click="btnEdit_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="516,145,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

@@ -82,7 +82,21 @@ namespace MediaCatalogue_WPF.Interactors
 
         public ResponseModel<Movie> SearchMovieByTitle(string query)
         {
-            throw new NotImplementedException();
+            RestClient client = new RestClient("http://localhost:8000/api/movie");
+
+            // Lookup the actor
+            // If it does not exist, then create it then get the id
+
+            RestRequest request = new RestRequest("SearchMovieByTitle", Method.GET);
+            request.AddParameter("query", query);
+
+            IRestResponse<ResponseModel<List<Movie>>> response = client.Execute<ResponseModel<List<Movie>>>(request);
+
+            ResponseModel<Movie> result = new ResponseModel<Movie>();
+            result.Data = JsonConvert.DeserializeObject<List<Movie>>(response.Content);
+            result.Message = response.StatusCode.ToString();
+
+            return result;
         }
     }
 }

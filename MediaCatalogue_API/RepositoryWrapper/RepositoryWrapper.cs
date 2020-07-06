@@ -361,6 +361,32 @@ namespace MediaCatalogue_API.RepositoryWrapper
             }
 
             return crew as TEntity;
-        }        
+        }
+
+        public List<TEntity> ReadMovieByTitle(string queryString)
+        {
+            SqlParameter titleParam = new SqlParameter("@query", SqlDbType.VarChar);
+            titleParam.Value = queryString;
+
+            SqlParameter[] parameters = { titleParam };
+
+            DataSet ds = Reader(parameters, "usp_SearchCatalogueByMovieTitle");
+            DataTable dt = ds.Tables[0];
+
+            List<Movie> movies = new List<Movie>();
+
+            foreach (DataRow drc in dt.Rows)
+            {
+                movies.Add(new Movie()
+                {
+                    Title = drc[0].ToString(),
+                    Location = drc[1].ToString(),
+                    Year = Convert.ToInt32(drc[2]),
+                    Genre = new Genre() { Name = drc[3].ToString() }
+                });
+            }
+
+            return movies as List<TEntity>;
+        }
     }
 }

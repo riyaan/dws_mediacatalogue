@@ -1,0 +1,25 @@
+﻿<Window x:Class="MediaCatalogue_WPF.Edit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaCatalogue_WPF"
+        mc:Ignorable="d"
+        Title="Edit a new Movie" Height="383.763" Width="366.714" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,-0.4,-8.6" Height="283" VerticalAlignment="Top">
+        <Label x:Name="label" Content="Title" HorizontalAlignment="Left" Margin="20,35,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
+        <Label x:Name="label_Copy" Content="Year" HorizontalAlignment="Left" Margin="20,69,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
+        <Label x:Name="label_Copy1" Content="Actors" HorizontalAlignment="Left" Margin="20,103,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
+        <Label x:Name="label_Copy2" Content="Director" HorizontalAlignment="Left" Margin="20,174,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
+        <Label x:Name="label_Copy3" Content="Genre" HorizontalAlignment="Left" Margin="20,213,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
+        <Label x:Name="label_Copy4" Content="Location" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" Width="82" Height="29"/>
+        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Height="23" Margin="107,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
+        <TextBox x:Name="txtYear" HorizontalAlignment="Left" Height="23" Margin="107,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"/>
+        <Button x:Name="btnAddMovie" Content="Ok" HorizontalAlignment="Left" Margin="152,319,0,-57" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.147,-0.128" Click="button_Click" IsDefault="True"/>
+        <TextBox x:Name="txtLocation" HorizontalAlignment="Left" Height="23" Margin="107,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.134,-0.284" ToolTip="E.g DVD, C:\movies, \\fileshare\movies"/>
+        <TextBox x:Name="txtActor" HorizontalAlignment="Left" Height="66" Margin="107,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
+        <TextBox x:Name="txtDirector" HorizontalAlignment="Left" Height="23" Margin="107,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtGenre" HorizontalAlignment="Left" Height="23" Margin="107,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

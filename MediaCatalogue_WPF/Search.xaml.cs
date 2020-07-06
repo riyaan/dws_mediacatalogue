@@ -1,6 +1,7 @@
 ﻿using MediaCatalogue_API.Models;
 using MediaCatalogue_WPF.Interactors;
 using MediaCatalogue_WPF.Interactors.Interfaces;
+using MediaCatalogue_WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,7 +31,7 @@ namespace MediaCatalogue_WPF
 
         private string _searchQuery;
 
-        public ObservableCollection<Actor> actors { get; set; }
+        public ObservableCollection<Movie> movies { get; set; }
 
         public Search(ISearchInteractor searchInteractor, IGenreInteractor genreInteractor, IActorInteractor actorInteractor,
             ICrewInteractor crewInteractor, string searchQuery)
@@ -45,17 +46,17 @@ namespace MediaCatalogue_WPF
 
             lblResults.Content = "Search results for '" + _searchQuery + "'";
 
-            //string[] items = { "Fido", "Spark", "Fluffy" };
+            var emptyList = new List<Tuple<string, string, int, string>>()
+            .Select(t => new { Title = t.Item1, Location = t.Item2, Year = t.Item3, Genre = t.Item4  }).ToList();
 
-            //// ... Assign ItemsSource of DataGrid.
-            //dgSearchResults.ItemsSource = items;
+            ResponseModel<Movie> searchResult = _searchInteractor.SearchMovieByTitle(searchQuery);
 
-            actors = new ObservableCollection<Actor>();
-            actors.Add(new Actor() { Name = "One" });
-            actors.Add(new Actor() { Name = "Two" });
-            actors.Add(new Actor() { Name = "Three" });
-            actors.Add(new Actor() { Name = "Four" });
-            actors.Add(new Actor() { Name = "Five" });
+            foreach (Movie movie in searchResult.Data)
+            {
+                emptyList.Add(new { Title = movie.Title, Location = movie.Location, Year = movie.Year, Genre = movie.Genre.Name });
+            }
+            
+            dgSearchResults.ItemsSource = emptyList;
 
             //string[] items = { "Fido", "Spark", "Fluffy" };
 
@@ -77,6 +78,9 @@ namespace MediaCatalogue_WPF
             
         }
 
-        
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            dgSearchResults.SelectedItem
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
 
         public List<Movie> Find(string query)
         {
-            return _repositoryWrapper.ReadAll(query);
+            return _repositoryWrapper.ReadMovieByTitle(query);
         }
 
         public Movie Edit(int id,  string title, int year, string location, List<Actor> actors, List<Crew> crew, Genre genre)
