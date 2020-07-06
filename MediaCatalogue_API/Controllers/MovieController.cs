@@ -1,5 +1,6 @@
 ﻿using MediaCatalogue_API.DomainServices.Interface;
 using MediaCatalogue_API.Models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -52,14 +53,18 @@ namespace MediaCatalogue_API.Controllers
 
         public Movie Add([FromBody] Movie movie)
         {
-            if (movie.Genre.Id == 0)
-                movie.Genre.Id = _genreRepository.GetGenreByName(movie.Genre.Name).FirstOrDefault().Id;
+            List<Genre> genre = _genreRepository.GetGenreByName(movie.Genre.Name);
+            movie.Genre = genre.SingleOrDefault();
+
+            string json = JsonConvert.SerializeObject(movie);
 
             return _movieRepository.Add(movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
         }
 
         public Movie Update([FromBody] Movie movie)
         {
+            string json = JsonConvert.SerializeObject(movie);
+
             return _movieRepository.Edit(movie.Id, movie.Title, movie.Year, movie.Location, movie.Actors, movie.Crew, movie.Genre);
         }
 

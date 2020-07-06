@@ -23,7 +23,7 @@ namespace MediaCatalogue_API.DomainServices.Interface
             Crew crew = _factory.Create(new object[] { name });
             int crewId = _repositoryWrapper.InsertCrew(crew);
 
-            return _repositoryWrapper.ReadGenreByID(crewId);
+            return _repositoryWrapper.ReadCrewByID(crewId);
         }
 
         public List<Crew> GetAllCrew()
