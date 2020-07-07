@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [MovieCatalogue]    Script Date: 07/02/2020 23:15:27 ******/
+/****** Object:  Database [MovieCatalogue]    Script Date: 07/07/2020 02:04:42 ******/
 CREATE DATABASE [MovieCatalogue] ON  PRIMARY 
 ( NAME = N'MovieCatalogue', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\MovieCatalogue.mdf' , SIZE = 2048KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
@@ -73,61 +73,120 @@ EXEC sys.sp_db_vardecimal_storage_format N'MovieCatalogue', N'ON'
 GO
 USE [MovieCatalogue]
 GO
-/****** Object:  ForeignKey [FK_Movie_Genre]    Script Date: 07/02/2020 23:15:30 ******/
-ALTER TABLE [dbo].[Movie] DROP CONSTRAINT [FK_Movie_Genre]
-GO
-/****** Object:  ForeignKey [FK_Crew_Role]    Script Date: 07/02/2020 23:15:30 ******/
+/****** Object:  ForeignKey [FK_Crew_Role]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[Crew] DROP CONSTRAINT [FK_Crew_Role]
 GO
-/****** Object:  ForeignKey [FK_CrewMovie_Crew]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_Movie_Genre]    Script Date: 07/07/2020 02:04:46 ******/
+ALTER TABLE [dbo].[Movie] DROP CONSTRAINT [FK_Movie_Genre]
+GO
+/****** Object:  ForeignKey [FK_CrewMovie_Crew]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[CrewMovie] DROP CONSTRAINT [FK_CrewMovie_Crew]
 GO
-/****** Object:  ForeignKey [FK_CrewMovie_Movie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_CrewMovie_Movie]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[CrewMovie] DROP CONSTRAINT [FK_CrewMovie_Movie]
 GO
-/****** Object:  ForeignKey [FK_ActorMovie_Actor]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_ActorMovie_Actor]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[ActorMovie] DROP CONSTRAINT [FK_ActorMovie_Actor]
 GO
-/****** Object:  ForeignKey [FK_ActorMovie_Movie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_ActorMovie_Movie]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[ActorMovie] DROP CONSTRAINT [FK_ActorMovie_Movie]
 GO
-/****** Object:  Table [dbo].[ActorMovie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  StoredProcedure [dbo].[TruncateTables]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[TruncateTables]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertActorMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_InsertActorMovie]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertCrewMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_InsertCrewMovie]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchActorsByMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchActorsByMovie]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCatalogue]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchCatalogue]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCrewByMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchCrewByMovie]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCrewByName]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchCrewByName]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCatalogueByMovieTitle]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchCatalogueByMovieTitle]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCrewById]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchCrewById]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_InsertMovie]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertCrew]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_InsertCrew]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_DeleteMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_DeleteMovie]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchMovieById]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchMovieById]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_UpdateMovie]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_UpdateMovie]
+GO
+/****** Object:  Table [dbo].[ActorMovie]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[ActorMovie] DROP CONSTRAINT [FK_ActorMovie_Actor]
 GO
 ALTER TABLE [dbo].[ActorMovie] DROP CONSTRAINT [FK_ActorMovie_Movie]
 GO
 DROP TABLE [dbo].[ActorMovie]
 GO
-/****** Object:  Table [dbo].[CrewMovie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  Table [dbo].[CrewMovie]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[CrewMovie] DROP CONSTRAINT [FK_CrewMovie_Crew]
 GO
 ALTER TABLE [dbo].[CrewMovie] DROP CONSTRAINT [FK_CrewMovie_Movie]
 GO
 DROP TABLE [dbo].[CrewMovie]
 GO
-/****** Object:  StoredProcedure [dbo].[usp_SearchCatalogue]    Script Date: 07/02/2020 23:15:33 ******/
-DROP PROCEDURE [dbo].[usp_SearchCatalogue]
+/****** Object:  Table [dbo].[Movie]    Script Date: 07/07/2020 02:04:46 ******/
+ALTER TABLE [dbo].[Movie] DROP CONSTRAINT [FK_Movie_Genre]
 GO
-/****** Object:  Table [dbo].[Crew]    Script Date: 07/02/2020 23:15:30 ******/
+ALTER TABLE [dbo].[Movie] DROP CONSTRAINT [DF_Movie_Deleted]
+GO
+DROP TABLE [dbo].[Movie]
+GO
+/****** Object:  Table [dbo].[Crew]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[Crew] DROP CONSTRAINT [FK_Crew_Role]
 GO
 DROP TABLE [dbo].[Crew]
 GO
-/****** Object:  Table [dbo].[Movie]    Script Date: 07/02/2020 23:15:30 ******/
-ALTER TABLE [dbo].[Movie] DROP CONSTRAINT [FK_Movie_Genre]
+/****** Object:  StoredProcedure [dbo].[usp_InsertActor]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_InsertActor]
 GO
-DROP TABLE [dbo].[Movie]
+/****** Object:  StoredProcedure [dbo].[usp_SearchActorById]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchActorById]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 07/02/2020 23:15:30 ******/
-DROP TABLE [dbo].[Role]
+/****** Object:  StoredProcedure [dbo].[usp_SearchActorByName]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchActorByName]
 GO
-/****** Object:  Table [dbo].[Actor]    Script Date: 07/02/2020 23:15:30 ******/
+/****** Object:  StoredProcedure [dbo].[usp_InsertGenre]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_InsertGenre]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchGenreById]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchGenreById]
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchGenreByName]    Script Date: 07/07/2020 02:04:46 ******/
+DROP PROCEDURE [dbo].[usp_SearchGenreByName]
+GO
+/****** Object:  Table [dbo].[Actor]    Script Date: 07/07/2020 02:04:45 ******/
 DROP TABLE [dbo].[Actor]
 GO
-/****** Object:  Table [dbo].[Genre]    Script Date: 07/02/2020 23:15:30 ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 07/07/2020 02:04:45 ******/
+DROP TABLE [dbo].[Role]
+GO
+/****** Object:  Table [dbo].[Genre]    Script Date: 07/07/2020 02:04:45 ******/
 DROP TABLE [dbo].[Genre]
 GO
-/****** Object:  Table [dbo].[Genre]    Script Date: 07/02/2020 23:15:30 ******/
+/****** Object:  Table [dbo].[Genre]    Script Date: 07/07/2020 02:04:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,32 +205,9 @@ GO
 SET ANSI_PADDING OFF
 GO
 SET IDENTITY_INSERT [dbo].[Genre] ON
-INSERT [dbo].[Genre] ([Id], [Name]) VALUES (1, N'Crime')
+INSERT [dbo].[Genre] ([Id], [Name]) VALUES (1, N'War')
 SET IDENTITY_INSERT [dbo].[Genre] OFF
-/****** Object:  Table [dbo].[Actor]    Script Date: 07/02/2020 23:15:30 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Actor](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](100) NOT NULL,
- CONSTRAINT [PK_Actor] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-SET IDENTITY_INSERT [dbo].[Actor] ON
-INSERT [dbo].[Actor] ([Id], [Name]) VALUES (1, N'Robert De Niro')
-INSERT [dbo].[Actor] ([Id], [Name]) VALUES (2, N'Ray Liotta')
-INSERT [dbo].[Actor] ([Id], [Name]) VALUES (3, N'Joe Pesci')
-SET IDENTITY_INSERT [dbo].[Actor] OFF
-/****** Object:  Table [dbo].[Role]    Script Date: 07/02/2020 23:15:30 ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 07/07/2020 02:04:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,36 +227,154 @@ SET ANSI_PADDING OFF
 GO
 SET IDENTITY_INSERT [dbo].[Role] ON
 INSERT [dbo].[Role] ([Id], [Title]) VALUES (1, N'Director')
-INSERT [dbo].[Role] ([Id], [Title]) VALUES (2, N'Writer')
-INSERT [dbo].[Role] ([Id], [Title]) VALUES (3, N'Editor')
-INSERT [dbo].[Role] ([Id], [Title]) VALUES (4, N'Director of Photography')
 SET IDENTITY_INSERT [dbo].[Role] OFF
-/****** Object:  Table [dbo].[Movie]    Script Date: 07/02/2020 23:15:30 ******/
+/****** Object:  Table [dbo].[Actor]    Script Date: 07/07/2020 02:04:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [dbo].[Movie](
+CREATE TABLE [dbo].[Actor](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Title] [varchar](200) NOT NULL,
-	[Year] [int] NULL,
-	[Location] [text] NOT NULL,
-	[Deleted] [bit] NOT NULL,
-	[GenreId] [int] NOT NULL,
- CONSTRAINT [PK_Movie] PRIMARY KEY CLUSTERED 
+	[Name] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_Actor] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 SET ANSI_PADDING OFF
 GO
-SET IDENTITY_INSERT [dbo].[Movie] ON
-INSERT [dbo].[Movie] ([Id], [Title], [Year], [Location], [Deleted], [GenreId]) VALUES (1, N'Goodfellas', 1990, N'DVD', 0, 1)
-SET IDENTITY_INSERT [dbo].[Movie] OFF
-/****** Object:  Table [dbo].[Crew]    Script Date: 07/02/2020 23:15:30 ******/
+SET IDENTITY_INSERT [dbo].[Actor] ON
+INSERT [dbo].[Actor] ([Id], [Name]) VALUES (1, N'Tom Berenger')
+INSERT [dbo].[Actor] ([Id], [Name]) VALUES (2, N' Charlie Sheen')
+SET IDENTITY_INSERT [dbo].[Actor] OFF
+/****** Object:  StoredProcedure [dbo].[usp_SearchGenreByName]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchGenreByName] 
+			@query varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Genre with (nolock) where name like '%'+ @query +'%'
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchGenreById]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchGenreById] 
+			@id int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Genre with (nolock) where Id = @id
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertGenre]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_InsertGenre] 
+			@name varchar(200)			
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	INSERT INTO [Genre]
+           ([Name])
+     VALUES
+           (@name)
+           
+     SELECT CAST(scope_identity() AS int);
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchActorByName]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchActorByName] 
+			@query varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Actor with (nolock) where name like '%'+ @query +'%'
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchActorById]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchActorById] 
+			@id int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Actor with (nolock) where Id = @id
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertActor]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_InsertActor] 
+			@name varchar(200)			
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	INSERT INTO [Actor]
+           ([Name])
+     VALUES
+           (@name)
+           
+     SELECT CAST(scope_identity() AS int);
+	
+END;
+GO
+/****** Object:  Table [dbo].[Crew]    Script Date: 07/07/2020 02:04:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -240,13 +394,276 @@ GO
 SET ANSI_PADDING OFF
 GO
 SET IDENTITY_INSERT [dbo].[Crew] ON
-INSERT [dbo].[Crew] ([Id], [Name], [RoleId]) VALUES (1, N'Martin Scorcese', 1)
-INSERT [dbo].[Crew] ([Id], [Name], [RoleId]) VALUES (2, N'Nicholas Pileggi', 2)
-INSERT [dbo].[Crew] ([Id], [Name], [RoleId]) VALUES (3, N'James Kwei', 3)
-INSERT [dbo].[Crew] ([Id], [Name], [RoleId]) VALUES (4, N'Thelma Schoonmaker', 3)
-INSERT [dbo].[Crew] ([Id], [Name], [RoleId]) VALUES (5, N'Michael Ballhaus', 4)
+INSERT [dbo].[Crew] ([Id], [Name], [RoleId]) VALUES (1, N'Oliver Stone', 1)
 SET IDENTITY_INSERT [dbo].[Crew] OFF
-/****** Object:  StoredProcedure [dbo].[usp_SearchCatalogue]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  Table [dbo].[Movie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Movie](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [varchar](200) NOT NULL,
+	[Year] [int] NULL,
+	[Location] [text] NOT NULL,
+	[Deleted] [bit] NOT NULL CONSTRAINT [DF_Movie_Deleted]  DEFAULT ((0)),
+	[GenreId] [int] NOT NULL,
+ CONSTRAINT [PK_Movie] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Movie] ON
+INSERT [dbo].[Movie] ([Id], [Title], [Year], [Location], [Deleted], [GenreId]) VALUES (1, N'Platoon', 1986, N'DVD', 0, 1)
+SET IDENTITY_INSERT [dbo].[Movie] OFF
+/****** Object:  Table [dbo].[CrewMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CrewMovie](
+	[CrewId] [int] NOT NULL,
+	[MovieId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+INSERT [dbo].[CrewMovie] ([CrewId], [MovieId]) VALUES (1, 1)
+/****** Object:  Table [dbo].[ActorMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ActorMovie](
+	[ActorId] [int] NOT NULL,
+	[MovieId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+INSERT [dbo].[ActorMovie] ([ActorId], [MovieId]) VALUES (1, 1)
+INSERT [dbo].[ActorMovie] ([ActorId], [MovieId]) VALUES (2, 1)
+/****** Object:  StoredProcedure [dbo].[usp_UpdateMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[usp_UpdateMovie] 
+			@id int,
+			@title varchar(200),
+			@year int,
+			@location varchar(200),
+			@genreId int,
+			@genreName varchar(200),
+			@crewId int,
+			@directorName varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	Update Movie set Title = @title, Year = @year, Location = @location
+	where Id = @id
+	
+	Update Genre set Name = @genreName where Id = @genreId
+	
+	Update Crew set Name = @directorName where Id = @crewId
+		
+           
+     SELECT @@rowcount;
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchMovieById]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchMovieById] 
+			@id int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Movie with (nolock) where Id = @id
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_DeleteMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[usp_DeleteMovie] 
+			@id int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	Update Movie set Deleted = 1 where Id = @id
+           
+     SELECT @@rowcount;
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertCrew]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_InsertCrew] 
+			@name varchar(200)			
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	INSERT INTO [Crew]
+           ([Name], [RoleId])
+     VALUES
+           (@name, 1) -- only adding functionality to add directors for now
+           
+     SELECT CAST(scope_identity() AS int);
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_InsertMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[usp_InsertMovie] 
+			@title varchar(200),
+			@year int,
+			@location varchar(200),
+			@genre int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	INSERT INTO [Movie]
+           ([Title]
+           ,[Year]
+           ,[Location]           
+           ,[GenreId])
+     VALUES
+           (@title, @year, @location, @genre)
+           
+     SELECT CAST(scope_identity() AS int);
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCrewById]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchCrewById] 
+			@id int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Crew with (nolock) where Id = @id
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCatalogueByMovieTitle]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[usp_SearchCatalogueByMovieTitle] 
+			@query varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--select m.Title, a.Name, m.Location, m.Year, c.Name as 'Director', g.name as 'Genre' from Movie m with (nolock)
+	--inner join ActorMovie am with (nolock) on am.movieId = m.Id
+	--inner join Actor a with (nolock) on a.Id = am.actorId
+	--inner join Genre g with (nolock) on g.Id = m.genreId
+	--inner join CrewMovie cm with (nolock) on cm.movieId = m.Id
+	--inner join Crew c with (nolock) on c.Id = cm.crewId
+	--where m.Title like '%' + @query + '%' and m.deleted = 0
+	
+	
+	select Title, Location, Year, g.Name, g.Id as 'Genre Id', m.Id as 'Movie Id'
+	from Movie m with (nolock) 
+	inner join Genre g on g.Id = m.GenreId
+	where deleted = 0 and title like '%' + @query + '%'
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCrewByName]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchCrewByName] 
+			@query varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * from Crew with (nolock) where name like '%'+ @query +'%'
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCrewByMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[usp_SearchCrewByMovie] 
+			@query varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT C.Id, C.Name from Crew C with (nolock) 
+	inner join CrewMovie CM with (nolock) on CM.CrewId = C.Id
+	inner join Movie M with (nolock) on M.Id = CM.MovieId
+	where M.Title like '%'+ @query +'%'
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[usp_SearchCatalogue]    Script Date: 07/07/2020 02:04:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -261,69 +678,149 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT * from Movie with (nolock) where Title like '%'+ @query +'%'
+	select m.Title, a.Name, m.Location, m.Year, c.Name as 'Director', g.name as 'Genre' from Movie m with (nolock)
+	inner join ActorMovie am with (nolock) on am.movieId = m.Id
+	inner join Actor a with (nolock) on a.Id = am.actorId
+	inner join Genre g with (nolock) on g.Id = m.genreId
+	inner join CrewMovie cm with (nolock) on cm.movieId = m.Id
+	inner join Crew c with (nolock) on c.Id = cm.crewId
+	where m.Title like '%' + @query + '%' and m.deleted = 0
 	
 END;
 GO
-/****** Object:  Table [dbo].[CrewMovie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  StoredProcedure [dbo].[usp_SearchActorsByMovie]    Script Date: 07/07/2020 02:04:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[CrewMovie](
-	[CrewId] [int] NOT NULL,
-	[MovieId] [int] NOT NULL
-) ON [PRIMARY]
+CREATE PROCEDURE [dbo].[usp_SearchActorsByMovie] 
+			@query varchar(200)
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT A.Id, A.Name from Actor A with (nolock) 
+	inner join ActorMovie AM with (nolock) on AM.ActorId = A.Id
+	inner join Movie M with (nolock) on M.Id = AM.MovieId
+	where M.Title like '%'+ @query +'%'
+	
+END;
 GO
-INSERT [dbo].[CrewMovie] ([CrewId], [MovieId]) VALUES (1, 1)
-INSERT [dbo].[CrewMovie] ([CrewId], [MovieId]) VALUES (2, 1)
-INSERT [dbo].[CrewMovie] ([CrewId], [MovieId]) VALUES (3, 1)
-INSERT [dbo].[CrewMovie] ([CrewId], [MovieId]) VALUES (4, 1)
-INSERT [dbo].[CrewMovie] ([CrewId], [MovieId]) VALUES (5, 1)
-/****** Object:  Table [dbo].[ActorMovie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  StoredProcedure [dbo].[usp_InsertCrewMovie]    Script Date: 07/07/2020 02:04:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ActorMovie](
-	[ActorId] [int] NOT NULL,
-	[MovieId] [int] NOT NULL
-) ON [PRIMARY]
+CREATE PROCEDURE [dbo].[usp_InsertCrewMovie] 
+			@crewId int,
+			@movieId int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	INSERT INTO [CrewMovie]
+           ([CrewId], [MovieId])
+     VALUES
+           (@crewId, @movieId)
+           
+     SELECT @@RowCount;
+	
+END;
 GO
-INSERT [dbo].[ActorMovie] ([ActorId], [MovieId]) VALUES (1, 1)
-INSERT [dbo].[ActorMovie] ([ActorId], [MovieId]) VALUES (2, 1)
-INSERT [dbo].[ActorMovie] ([ActorId], [MovieId]) VALUES (3, 1)
-/****** Object:  ForeignKey [FK_Movie_Genre]    Script Date: 07/02/2020 23:15:30 ******/
-ALTER TABLE [dbo].[Movie]  WITH CHECK ADD  CONSTRAINT [FK_Movie_Genre] FOREIGN KEY([GenreId])
-REFERENCES [dbo].[Genre] ([Id])
+/****** Object:  StoredProcedure [dbo].[usp_InsertActorMovie]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
 GO
-ALTER TABLE [dbo].[Movie] CHECK CONSTRAINT [FK_Movie_Genre]
+SET QUOTED_IDENTIFIER ON
 GO
-/****** Object:  ForeignKey [FK_Crew_Role]    Script Date: 07/02/2020 23:15:30 ******/
+CREATE PROCEDURE [dbo].[usp_InsertActorMovie] 
+			@actorId int,
+			@movieId int
+			
+			AS
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	INSERT INTO [ActorMovie]
+           ([ActorId], [MovieId])
+     VALUES
+           (@actorId, @movieId)
+           
+     SELECT @@RowCount;
+	
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[TruncateTables]    Script Date: 07/07/2020 02:04:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[TruncateTables] 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;	
+
+	delete from crewmovie
+	delete from actormovie		
+	delete from movie
+	delete from actor
+	delete from genre
+	delete from crew
+	delete from [role]
+	
+	DBCC CHECKIDENT ('movie', RESEED, 0)
+	DBCC CHECKIDENT ('actor', RESEED, 0)
+	DBCC CHECKIDENT ('genre', RESEED, 0)
+	DBCC CHECKIDENT ('crew', RESEED, 0)
+	DBCC CHECKIDENT ('role', RESEED, 0)
+	
+	insert into [role](title) values('Director')
+	
+END;
+GO
+/****** Object:  ForeignKey [FK_Crew_Role]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[Crew]  WITH CHECK ADD  CONSTRAINT [FK_Crew_Role] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Role] ([Id])
 GO
 ALTER TABLE [dbo].[Crew] CHECK CONSTRAINT [FK_Crew_Role]
 GO
-/****** Object:  ForeignKey [FK_CrewMovie_Crew]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_Movie_Genre]    Script Date: 07/07/2020 02:04:46 ******/
+ALTER TABLE [dbo].[Movie]  WITH CHECK ADD  CONSTRAINT [FK_Movie_Genre] FOREIGN KEY([GenreId])
+REFERENCES [dbo].[Genre] ([Id])
+GO
+ALTER TABLE [dbo].[Movie] CHECK CONSTRAINT [FK_Movie_Genre]
+GO
+/****** Object:  ForeignKey [FK_CrewMovie_Crew]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[CrewMovie]  WITH CHECK ADD  CONSTRAINT [FK_CrewMovie_Crew] FOREIGN KEY([CrewId])
 REFERENCES [dbo].[Crew] ([Id])
 GO
 ALTER TABLE [dbo].[CrewMovie] CHECK CONSTRAINT [FK_CrewMovie_Crew]
 GO
-/****** Object:  ForeignKey [FK_CrewMovie_Movie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_CrewMovie_Movie]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[CrewMovie]  WITH CHECK ADD  CONSTRAINT [FK_CrewMovie_Movie] FOREIGN KEY([MovieId])
 REFERENCES [dbo].[Movie] ([Id])
 GO
 ALTER TABLE [dbo].[CrewMovie] CHECK CONSTRAINT [FK_CrewMovie_Movie]
 GO
-/****** Object:  ForeignKey [FK_ActorMovie_Actor]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_ActorMovie_Actor]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[ActorMovie]  WITH CHECK ADD  CONSTRAINT [FK_ActorMovie_Actor] FOREIGN KEY([ActorId])
 REFERENCES [dbo].[Actor] ([Id])
 GO
 ALTER TABLE [dbo].[ActorMovie] CHECK CONSTRAINT [FK_ActorMovie_Actor]
 GO
-/****** Object:  ForeignKey [FK_ActorMovie_Movie]    Script Date: 07/02/2020 23:15:33 ******/
+/****** Object:  ForeignKey [FK_ActorMovie_Movie]    Script Date: 07/07/2020 02:04:46 ******/
 ALTER TABLE [dbo].[ActorMovie]  WITH CHECK ADD  CONSTRAINT [FK_ActorMovie_Movie] FOREIGN KEY([MovieId])
 REFERENCES [dbo].[Movie] ([Id])
 GO

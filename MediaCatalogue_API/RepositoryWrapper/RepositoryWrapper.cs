@@ -13,10 +13,6 @@ namespace MediaCatalogue_API.RepositoryWrapper
 
         public int InsertMovie(TEntity entity)
         {
-            // TODO: Relook at this
-            //Type objType = typeof(TEntity);
-            //Movie item = (Movie)Activator.CreateInstance(objType);
-
             Movie item = entity as Movie;
 
             SqlParameter titleParam = new SqlParameter("@title", SqlDbType.VarChar);
